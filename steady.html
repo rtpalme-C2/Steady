@@ -642,6 +642,10 @@
     <span class="stat-value neutral" id="stat-avg">—</span>
     <span class="stat-label">Avg / Wk</span>
   </div>
+  <div class="stat-item">
+    <span class="stat-value neutral" id="stat-mood" style="font-size:20px;">—</span>
+    <span class="stat-label">Motivation</span>
+  </div>
 </div>
 
 <!-- MAIN -->
@@ -823,7 +827,22 @@ function computeStats(entries) {
     avgPerWeek = weeks > 0 ? totalLost / weeks : null;
   }
 
-  return { current: last, weekDelta, totalLost, avgPerWeek };
+  // mood: most recent + 3-entry trend
+  const moodScale = { happy: 2, neutral: 1, sad: 0 };
+  const withMood = sorted.filter(e => e.mood);
+  let latestMood = null;
+  let moodTrend  = null;
+  if (withMood.length >= 1) {
+    latestMood = withMood[withMood.length - 1].mood;
+  }
+  if (withMood.length >= 3) {
+    const last3 = withMood.slice(-3).map(e => moodScale[e.mood]);
+    if (last3[2] > last3[0])      moodTrend = 'up';
+    else if (last3[2] < last3[0]) moodTrend = 'down';
+    else                           moodTrend = 'flat';
+  }
+
+  return { current: last, weekDelta, totalLost, avgPerWeek, latestMood, moodTrend };
 }
 
 function renderStats(entries) {
@@ -833,9 +852,10 @@ function renderStats(entries) {
   const elDelta   = document.getElementById('stat-delta');
   const elTotal   = document.getElementById('stat-total');
   const elAvg     = document.getElementById('stat-avg');
+  const elMood    = document.getElementById('stat-mood');
 
   if (!stats) {
-    [elCurrent, elDelta, elTotal, elAvg].forEach(el => {
+    [elCurrent, elDelta, elTotal, elAvg, elMood].forEach(el => {
       el.textContent = '—';
       el.className = 'stat-value neutral';
     });
@@ -872,6 +892,18 @@ function renderStats(entries) {
   } else {
     elAvg.textContent = '—';
     elAvg.className = 'stat-value neutral';
+  }
+
+  if (stats.latestMood) {
+    const moodEmoji = stats.latestMood === 'happy' ? '😊' : stats.latestMood === 'neutral' ? '😐' : '😔';
+    const trendArrow = stats.moodTrend === 'up' ? ' ↑' : stats.moodTrend === 'down' ? ' ↓' : '';
+    elMood.textContent = moodEmoji + trendArrow;
+    elMood.className = 'stat-value ' + (stats.moodTrend === 'up' ? 'down' : stats.moodTrend === 'down' ? 'up' : 'neutral');
+    elMood.style.fontSize = '18px';
+  } else {
+    elMood.textContent = '—';
+    elMood.className = 'stat-value neutral';
+    elMood.style.fontSize = '';
   }
 }
 
