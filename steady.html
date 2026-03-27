@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Steady · Chapter 1 · Health</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTYwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCI+CiAgPHJlY3Qgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxNjAiIHJ4PSIzNCIgZmlsbD0iIzFGMzMyOSIvPgogIDxlbGxpcHNlIGN4PSI4MiIgY3k9IjEzOCIgcng9IjUyIiByeT0iMjYiIGZpbGw9IiMxODJEMjIiLz4KICA8ZWxsaXBzZSBjeD0iODIiIGN5PSIxMjQiIHJ4PSI1MiIgcnk9IjI2IiBmaWxsPSIjM0Q1RTRBIi8+CiAgPGVsbGlwc2UgY3g9Ijc2IiBjeT0iOTYiICByeD0iMzciIHJ5PSIyMiIgZmlsbD0iIzE4MkQyMiIvPgogIDxlbGxpcHNlIGN4PSI3NiIgY3k9Ijg0IiAgcng9IjM3IiByeT0iMjIiIGZpbGw9IiM0QTdBNUUiLz4KICA8ZWxsaXBzZSBjeD0iODYiIGN5PSI2MCIgIHJ4PSIyNCIgcnk9IjE4IiBmaWxsPSIjMTgyRDIyIi8+CiAgPGVsbGlwc2UgY3g9Ijg2IiBjeT0iNDkiICByeD0iMjQiIHJ5PSIxOCIgZmlsbD0iI0Q0QjA2QSIvPgo8L3N2Zz4K">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTYwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCI+CiAgPHJlY3Qgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxNjAiIHJ4PSIzNCIgZmlsbD0iIzFGMzMyOSIvPgogIDxlbGxpcHNlIGN4PSI4MiIgY3k9IjEzOCIgcng9IjUyIiByeT0iMjYiIGZpbGw9IiMxODJEMjIiLz4KICA8ZWxsaXBzZSBjeD0iODIiIGN5PSIxMjQiIHJ4PSI1MiIgcnk9IjI2IiBmaWxsPSIjM0Q1RTRBIi8+CiAgPGVsbGlwc2UgY3g9Ijc2IiBjeT0iOTYiICByeD0iMzciIHJ5PSIyMiIgZmlsbD0iIzE4MkQyMiIvPgogIDxlbGxpcHNlIGN4PSI3NiIgY3k9Ijg0IiAgcng9IjM3IiByeT0iMjIiIGZpbGw9IiM0QTdBNUUiLz4KICA8ZWxsaXBzZSBjeD0iODYiIGN5PSI2MCIgIHJ4PSIyNCIgcnk9IjE4IiBmaWxsPSIjMTgyRDIyIi8+CiAgPGVsbGlwc2UgY3g9Ijg2IiBjeT0iNDkiICByeD0iMjQiIHJ5PSIxOCIgZmlsbD0iI0Q0QjA2QSIvPgo8L3N2Zz4K">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest-deep:   #1F3329;
+    --forest-mid:    #2D4A3A;
+    --forest-light:  #4A7A5E;
+    --parchment:     #F0EADA;
+    --parchment-dim: #E2D9C8;
+    --amber:         #D4B06A;
+    --amber-light:   #E8C97E;
+    --amber-dim:     #A8883E;
+    --text-primary:  #1A2B22;
+    --text-secondary:#3D5A48;
+    --text-muted:    #6B8F79;
+    --text-on-dark:  #F0EADA;
+    --text-dim:      #C8BEA8;
+    --success:       #4A7A5E;
+    --warn:          #B85C3A;
+    --warn-light:    #E8705A;
+    --radius:        10px;
+    --radius-sm:     6px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--parchment);
+    color: var(--text-primary);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  .app-header {
+    background: var(--forest-deep);
+    position: relative;
+    overflow: hidden;
+    padding: 0 0 0 0;
+  }
+
+  .header-svg {
+    display: block;
+    width: 100%;
+    height: 110px;
+  }
+
+  .header-content {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 24px;
+    gap: 20px;
+  }
+
+  .header-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    flex-shrink: 0;
+  }
+
+  .header-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .header-eyebrow {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    opacity: 0.85;
+  }
+
+  .header-wordmark {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 36px;
+    font-weight: 200;
+    color: var(--text-on-dark);
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+
+  .header-tagline {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    opacity: 0.7;
+  }
+
+  /* accent rule */
+  .header-rule {
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, var(--amber-dim) 20%, var(--amber) 50%, var(--amber-dim) 80%, transparent 100%);
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--forest-mid);
+    display: flex;
+    justify-content: space-around;
+    padding: 14px 16px;
+    gap: 8px;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+  }
+
+  .stat-item + .stat-item {
+    border-left: 1px solid rgba(240,234,218,0.1);
+  }
+
+  .stat-value {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--amber-light);
+    letter-spacing: -0.02em;
+  }
+
+  .stat-value.neutral { color: var(--text-dim); }
+  .stat-value.down    { color: #7EC8A0; }
+  .stat-value.up      { color: var(--warn-light); }
+
+  .stat-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    opacity: 0.7;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    padding: 20px 16px 100px;
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--parchment-dim);
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(31,51,41,0.06);
+  }
+
+  .card-body {
+    padding: 16px;
+  }
+
+  /* ── LOG FORM ── */
+  .log-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+
+  .form-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .form-input {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text-primary);
+    background: var(--parchment);
+    border: 1px solid var(--parchment-dim);
+    border-radius: var(--radius-sm);
+    padding: 9px 12px;
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+
+  .form-input:focus {
+    border-color: var(--amber);
+    background: white;
+  }
+
+  .form-input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+
+  .form-note {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-primary);
+    background: var(--parchment);
+    border: 1px solid var(--parchment-dim);
+    border-radius: var(--radius-sm);
+    padding: 9px 12px;
+    outline: none;
+    resize: none;
+    height: 52px;
+    transition: border-color 0.15s, background 0.15s;
+    width: 100%;
+  }
+
+  .form-note:focus {
+    border-color: var(--amber);
+    background: white;
+  }
+
+  .form-note::placeholder {
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+
+  .btn-log {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--forest-deep);
+    background: var(--amber);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    width: 100%;
+  }
+
+  .btn-log:hover  { background: var(--amber-light); }
+  .btn-log:active { transform: scale(0.98); }
+
+  /* ── CHART ── */
+  .chart-container {
+    padding: 16px 16px 8px;
+  }
+
+  #trend-chart {
+    width: 100%;
+    height: 120px;
+    display: block;
+  }
+
+  .chart-empty {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+
+  /* ── HISTORY TABLE ── */
+  .history-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .history-row {
+    display: flex;
+    align-items: center;
+    padding: 11px 16px;
+    gap: 12px;
+    border-bottom: 1px solid var(--parchment);
+    transition: background 0.1s;
+  }
+
+  .history-row:last-child { border-bottom: none; }
+  .history-row:hover { background: #FAFAF8; }
+
+  .history-date {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    width: 76px;
+    flex-shrink: 0;
+  }
+
+  .history-weight {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    flex-shrink: 0;
+    width: 60px;
+  }
+
+  .history-delta {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    flex-shrink: 0;
+    width: 52px;
+  }
+
+  .history-delta.down { color: #4A9E70; }
+  .history-delta.up   { color: var(--warn); }
+  .history-delta.flat { color: var(--text-muted); opacity: 0.5; }
+
+  .history-note {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-muted);
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .btn-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--parchment-dim);
+    font-size: 14px;
+    padding: 4px;
+    border-radius: 4px;
+    transition: color 0.15s;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .btn-delete:hover { color: var(--warn); }
+
+  .history-empty {
+    padding: 24px 16px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    opacity: 0.5;
+    text-align: center;
+  }
+
+  /* ── SHOT TRACKER ── */
+  .shot-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .shot-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--parchment);
+  }
+
+  .shot-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .shot-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .shot-subtitle {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+  }
+
+  /* toggle */
+  .toggle-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .toggle-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+
+  .toggle {
+    position: relative;
+    width: 38px;
+    height: 22px;
+    cursor: pointer;
+  }
+
+  .toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+
+  .toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: var(--parchment-dim);
+    border-radius: 11px;
+    transition: background 0.2s;
+  }
+
+  .toggle-slider::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 3px;
+    top: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  }
+
+  .toggle input:checked + .toggle-slider {
+    background: var(--forest-light);
+  }
+
+  .toggle input:checked + .toggle-slider::before {
+    transform: translateX(16px);
+  }
+
+  .shot-log {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .shot-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--parchment);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+
+  .shot-row:last-child { border-bottom: none; }
+
+  .shot-check {
+    color: var(--forest-light);
+    font-size: 12px;
+  }
+
+  .shot-log-empty {
+    padding: 16px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    opacity: 0.5;
+    text-align: center;
+  }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--forest-deep);
+    color: var(--amber-light);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    padding: 10px 20px;
+    border-radius: 20px;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    opacity: 0;
+    white-space: nowrap;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(31,51,41,0.25);
+  }
+
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="app-header">
+  <svg class="header-svg" viewBox="0 0 390 110" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <!-- Background -->
+    <rect width="390" height="110" fill="#1F3329"/>
+    <!-- Sweeping amber paths -->
+    <path d="M-20 85 Q80 40 200 70 Q320 100 420 55" stroke="#D4B06A" stroke-width="1.5" fill="none" opacity="0.18"/>
+    <path d="M-20 95 Q100 55 220 80 Q340 105 420 68" stroke="#D4B06A" stroke-width="0.8" fill="none" opacity="0.1"/>
+    <path d="M-20 60 Q60 25 180 55 Q300 85 420 38" stroke="#E8C97E" stroke-width="0.6" fill="none" opacity="0.08"/>
+  </svg>
+  <div class="header-content">
+    <img class="header-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTYwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCI+CiAgPHJlY3Qgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxNjAiIHJ4PSIzNCIgZmlsbD0iIzFGMzMyOSIvPgogIDxlbGxpcHNlIGN4PSI4MiIgY3k9IjEzOCIgcng9IjUyIiByeT0iMjYiIGZpbGw9IiMxODJEMjIiLz4KICA8ZWxsaXBzZSBjeD0iODIiIGN5PSIxMjQiIHJ4PSI1MiIgcnk9IjI2IiBmaWxsPSIjM0Q1RTRBIi8+CiAgPGVsbGlwc2UgY3g9Ijc2IiBjeT0iOTYiICByeD0iMzciIHJ5PSIyMiIgZmlsbD0iIzE4MkQyMiIvPgogIDxlbGxpcHNlIGN4PSI3NiIgY3k9Ijg0IiAgcng9IjM3IiByeT0iMjIiIGZpbGw9IiM0QTdBNUUiLz4KICA8ZWxsaXBzZSBjeD0iODYiIGN5PSI2MCIgIHJ4PSIyNCIgcnk9IjE4IiBmaWxsPSIjMTgyRDIyIi8+CiAgPGVsbGlwc2UgY3g9Ijg2IiBjeT0iNDkiICByeD0iMjQiIHJ5PSIxOCIgZmlsbD0iI0Q0QjA2QSIvPgo8L3N2Zz4K" alt="Steady">
+    <div class="header-text">
+      <span class="header-eyebrow">Chapter 1 · Health</span>
+      <span class="header-wordmark">Steady</span>
+      <span class="header-tagline">Weekly · Weight · Progress</span>
+    </div>
+  </div>
+</header>
+<div class="header-rule"></div>
+
+<!-- STATS BAR -->
+<div class="stats-bar" id="stats-bar">
+  <div class="stat-item">
+    <span class="stat-value neutral" id="stat-current">—</span>
+    <span class="stat-label">Current</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-value neutral" id="stat-delta">—</span>
+    <span class="stat-label">This Week</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-value neutral" id="stat-total">—</span>
+    <span class="stat-label">Total Lost</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-value neutral" id="stat-avg">—</span>
+    <span class="stat-label">Avg / Wk</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- Log Entry -->
+  <div>
+    <div class="section-header">Log a Weigh-In</div>
+    <div class="card">
+      <div class="card-body">
+        <div class="log-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="input-date">Date</label>
+              <input class="form-input" type="date" id="input-date">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="input-weight">Weight (lbs)</label>
+              <input class="form-input" type="number" id="input-weight" placeholder="0.0" step="0.1" min="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="input-note">Note (optional)</label>
+            <textarea class="form-note" id="input-note" placeholder="How are you feeling..."></textarea>
+          </div>
+          <button class="btn-log" id="btn-log">Log Weigh-In</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trend Chart -->
+  <div>
+    <div class="section-header">Trend</div>
+    <div class="card">
+      <div class="chart-container" id="chart-wrap">
+        <div class="chart-empty" id="chart-empty">No data yet</div>
+        <svg id="trend-chart" style="display:none;"></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shot Tracker -->
+  <div>
+    <div class="section-header">Sunday Shot</div>
+    <div class="card shot-section">
+      <div class="shot-header">
+        <div class="shot-title-group">
+          <span class="shot-title">Weekly Injection</span>
+          <span class="shot-subtitle" id="shot-next-label">Next Sunday</span>
+        </div>
+        <label class="toggle" title="Mark this Sunday's shot as done">
+          <input type="checkbox" id="shot-toggle">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="shot-log" id="shot-log">
+        <div class="shot-log-empty" id="shot-log-empty">No shots logged yet</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- History -->
+  <div>
+    <div class="section-header">History</div>
+    <div class="card">
+      <div class="history-list" id="history-list">
+        <div class="history-empty">No weigh-ins logged yet</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── STORAGE ──
+const STORAGE_KEY       = 'steady-v1';
+const SHOTS_STORAGE_KEY = 'steady-shots-v1';
+
+function loadEntries() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+  catch { return []; }
+}
+
+function saveEntries(entries) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+}
+
+function loadShots() {
+  try { return JSON.parse(localStorage.getItem(SHOTS_STORAGE_KEY)) || []; }
+  catch { return []; }
+}
+
+function saveShots(shots) {
+  localStorage.setItem(SHOTS_STORAGE_KEY, JSON.stringify(shots));
+}
+
+// ── TOAST ──
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ── DATE UTILS ──
+function todayISO() {
+  const d = new Date();
+  return d.toISOString().split('T')[0];
+}
+
+function formatDate(iso) {
+  const [y, m, d] = iso.split('-');
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${months[parseInt(m)-1]} ${parseInt(d)}`;
+}
+
+function nextSunday() {
+  const d = new Date();
+  const day = d.getDay();
+  const diff = day === 0 ? 7 : 7 - day;
+  d.setDate(d.getDate() + diff);
+  return d.toISOString().split('T')[0];
+}
+
+function thisSunday() {
+  const d = new Date();
+  const day = d.getDay();
+  const diff = 0 - day;
+  d.setDate(d.getDate() + diff);
+  return d.toISOString().split('T')[0];
+}
+
+function isSunday() {
+  return new Date().getDay() === 0;
+}
+
+// ── STATS ──
+function computeStats(entries) {
+  if (!entries.length) return null;
+  const sorted = [...entries].sort((a,b) => a.date.localeCompare(b.date));
+  const first  = sorted[0].weight;
+  const last   = sorted[sorted.length - 1].weight;
+
+  // weekly delta: compare most recent two entries
+  let weekDelta = null;
+  if (sorted.length >= 2) {
+    weekDelta = last - sorted[sorted.length - 2].weight;
+  }
+
+  // total lost
+  const totalLost = first - last;
+
+  // avg per week
+  let avgPerWeek = null;
+  if (sorted.length >= 2) {
+    const firstDate = new Date(sorted[0].date);
+    const lastDate  = new Date(sorted[sorted.length-1].date);
+    const weeks = (lastDate - firstDate) / (7 * 24 * 60 * 60 * 1000);
+    avgPerWeek = weeks > 0 ? totalLost / weeks : null;
+  }
+
+  return { current: last, weekDelta, totalLost, avgPerWeek };
+}
+
+function renderStats(entries) {
+  const stats = computeStats(entries);
+
+  const elCurrent = document.getElementById('stat-current');
+  const elDelta   = document.getElementById('stat-delta');
+  const elTotal   = document.getElementById('stat-total');
+  const elAvg     = document.getElementById('stat-avg');
+
+  if (!stats) {
+    [elCurrent, elDelta, elTotal, elAvg].forEach(el => {
+      el.textContent = '—';
+      el.className = 'stat-value neutral';
+    });
+    return;
+  }
+
+  elCurrent.textContent = stats.current.toFixed(1);
+  elCurrent.className = 'stat-value';
+
+  if (stats.weekDelta !== null) {
+    const sign = stats.weekDelta < 0 ? '−' : stats.weekDelta > 0 ? '+' : '';
+    elDelta.textContent = sign + Math.abs(stats.weekDelta).toFixed(1);
+    elDelta.className = 'stat-value ' + (stats.weekDelta < 0 ? 'down' : stats.weekDelta > 0 ? 'up' : 'neutral');
+  } else {
+    elDelta.textContent = '—';
+    elDelta.className = 'stat-value neutral';
+  }
+
+  if (stats.totalLost > 0) {
+    elTotal.textContent = '−' + stats.totalLost.toFixed(1);
+    elTotal.className = 'stat-value down';
+  } else if (stats.totalLost < 0) {
+    elTotal.textContent = '+' + Math.abs(stats.totalLost).toFixed(1);
+    elTotal.className = 'stat-value up';
+  } else {
+    elTotal.textContent = '0.0';
+    elTotal.className = 'stat-value neutral';
+  }
+
+  if (stats.avgPerWeek !== null) {
+    const sign = stats.avgPerWeek > 0 ? '−' : '+';
+    elAvg.textContent = sign + Math.abs(stats.avgPerWeek).toFixed(1);
+    elAvg.className = 'stat-value ' + (stats.avgPerWeek > 0 ? 'down' : 'up');
+  } else {
+    elAvg.textContent = '—';
+    elAvg.className = 'stat-value neutral';
+  }
+}
+
+// ── CHART ──
+function renderChart(entries) {
+  const svg   = document.getElementById('trend-chart');
+  const empty = document.getElementById('chart-empty');
+
+  if (entries.length < 2) {
+    svg.style.display = 'none';
+    empty.style.display = 'flex';
+    return;
+  }
+
+  svg.style.display = 'block';
+  empty.style.display = 'none';
+
+  const sorted = [...entries].sort((a,b) => a.date.localeCompare(b.date));
+  const W = svg.parentElement.offsetWidth - 32;
+  const H = 120;
+  const PAD = { top: 12, right: 12, bottom: 24, left: 36 };
+  const iW  = W - PAD.left - PAD.right;
+  const iH  = H - PAD.top  - PAD.bottom;
+
+  const weights = sorted.map(e => e.weight);
+  const minW = Math.min(...weights) - 1;
+  const maxW = Math.max(...weights) + 1;
+
+  const xScale = i => PAD.left + (i / (sorted.length - 1)) * iW;
+  const yScale = w => PAD.top  + iH - ((w - minW) / (maxW - minW)) * iH;
+
+  const pts = sorted.map((e, i) => [xScale(i), yScale(e.weight)]);
+
+  // build path
+  const linePath  = pts.map((p,i) => (i===0?`M${p[0]},${p[1]}`:`L${p[0]},${p[1]}`)).join(' ');
+  const areaPath  = linePath + ` L${pts[pts.length-1][0]},${PAD.top+iH} L${pts[0][0]},${PAD.top+iH} Z`;
+
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('width', W);
+  svg.setAttribute('height', H);
+
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="area-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#4A7A5E" stop-opacity="0.18"/>
+        <stop offset="100%" stop-color="#4A7A5E" stop-opacity="0.02"/>
+      </linearGradient>
+    </defs>
+    <!-- Y axis labels -->
+    ${[0, 0.5, 1].map(t => {
+      const w = minW + t * (maxW - minW);
+      const y = yScale(w);
+      return `<text x="${PAD.left - 6}" y="${y + 4}" text-anchor="end" font-family="Plus Jakarta Sans, sans-serif" font-size="8" fill="#6B8F79" opacity="0.7">${w.toFixed(0)}</text>`;
+    }).join('')}
+    <!-- Grid lines -->
+    ${[0, 0.5, 1].map(t => {
+      const y = yScale(minW + t * (maxW - minW));
+      return `<line x1="${PAD.left}" y1="${y}" x2="${PAD.left + iW}" y2="${y}" stroke="#E2D9C8" stroke-width="0.8"/>`;
+    }).join('')}
+    <!-- Area fill -->
+    <path d="${areaPath}" fill="url(#area-grad)"/>
+    <!-- Line -->
+    <path d="${linePath}" stroke="#4A7A5E" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Dots + amber waypoint on last -->
+    ${pts.map((p, i) => {
+      const isLast = i === pts.length - 1;
+      if (isLast) {
+        return `<circle cx="${p[0]}" cy="${p[1]}" r="5" fill="#D4B06A" stroke="white" stroke-width="1.5"/>`;
+      }
+      return `<circle cx="${p[0]}" cy="${p[1]}" r="2.5" fill="#4A7A5E" opacity="0.6"/>`;
+    }).join('')}
+    <!-- X axis date labels (first and last) -->
+    <text x="${pts[0][0]}" y="${H - 4}" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="8" fill="#6B8F79" opacity="0.7">${formatDate(sorted[0].date)}</text>
+    <text x="${pts[pts.length-1][0]}" y="${H - 4}" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="8" fill="#D4B06A" opacity="0.9">${formatDate(sorted[sorted.length-1].date)}</text>
+  `;
+}
+
+// ── HISTORY ──
+function renderHistory(entries) {
+  const container = document.getElementById('history-list');
+  if (!entries.length) {
+    container.innerHTML = '<div class="history-empty">No weigh-ins logged yet</div>';
+    return;
+  }
+
+  const sorted = [...entries].sort((a,b) => b.date.localeCompare(a.date));
+  const byDate = [...entries].sort((a,b) => a.date.localeCompare(b.date));
+
+  container.innerHTML = sorted.map((entry, idx) => {
+    // find previous entry in chronological order
+    const chronIdx = byDate.findIndex(e => e.date === entry.date && e.weight === entry.weight);
+    const prev = chronIdx > 0 ? byDate[chronIdx - 1] : null;
+    const delta = prev ? entry.weight - prev.weight : null;
+
+    let deltaStr = '—';
+    let deltaClass = 'flat';
+    if (delta !== null) {
+      if (delta < 0) { deltaStr = '−' + Math.abs(delta).toFixed(1); deltaClass = 'down'; }
+      else if (delta > 0) { deltaStr = '+' + delta.toFixed(1); deltaClass = 'up'; }
+      else { deltaStr = '±0.0'; deltaClass = 'flat'; }
+    }
+
+    return `
+      <div class="history-row">
+        <span class="history-date">${formatDate(entry.date)}</span>
+        <span class="history-weight">${entry.weight.toFixed(1)}</span>
+        <span class="history-delta ${deltaClass}">${deltaStr}</span>
+        <span class="history-note">${entry.note || ''}</span>
+        <button class="btn-delete" data-date="${entry.date}" data-weight="${entry.weight}" title="Delete">×</button>
+      </div>
+    `;
+  }).join('');
+
+  // delete handlers
+  container.querySelectorAll('.btn-delete').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const date   = btn.dataset.date;
+      const weight = parseFloat(btn.dataset.weight);
+      let entries  = loadEntries();
+      const idx    = entries.findIndex(e => e.date === date && e.weight === weight);
+      if (idx > -1) {
+        entries.splice(idx, 1);
+        saveEntries(entries);
+        renderAll();
+        showToast('Entry deleted');
+      }
+    });
+  });
+}
+
+// ── SHOT TRACKER ──
+function renderShots() {
+  const shots     = loadShots();
+  const toggle    = document.getElementById('shot-toggle');
+  const logEl     = document.getElementById('shot-log');
+  const emptyEl   = document.getElementById('shot-log-empty');
+  const nextLabel = document.getElementById('shot-next-label');
+
+  // determine this week's Sunday
+  const sunday = isSunday() ? todayISO() : thisSunday();
+  const alreadyLogged = shots.some(s => s.date === sunday);
+
+  toggle.checked = alreadyLogged;
+
+  // label
+  if (isSunday()) {
+    nextLabel.textContent = alreadyLogged ? 'Done today ✓' : 'Today';
+  } else {
+    const d = new Date(nextSunday() + 'T12:00:00');
+    nextLabel.textContent = `Next: ${formatDate(nextSunday())}`;
+  }
+
+  // log
+  const recent = [...shots].sort((a,b) => b.date.localeCompare(a.date)).slice(0, 8);
+  if (!recent.length) {
+    if (emptyEl) emptyEl.style.display = 'block';
+    logEl.querySelectorAll('.shot-row').forEach(r => r.remove());
+    return;
+  }
+  if (emptyEl) emptyEl.style.display = 'none';
+
+  // remove old rows
+  logEl.querySelectorAll('.shot-row').forEach(r => r.remove());
+  recent.forEach(s => {
+    const row = document.createElement('div');
+    row.className = 'shot-row';
+    row.innerHTML = `<span>${formatDate(s.date)}</span><span class="shot-check">✓</span>`;
+    logEl.appendChild(row);
+  });
+}
+
+// ── RENDER ALL ──
+function renderAll() {
+  const entries = loadEntries();
+  renderStats(entries);
+  renderChart(entries);
+  renderHistory(entries);
+  renderShots();
+}
+
+// ── LOG FORM ──
+document.getElementById('input-date').value = todayISO();
+
+document.getElementById('btn-log').addEventListener('click', () => {
+  const dateVal   = document.getElementById('input-date').value;
+  const weightVal = parseFloat(document.getElementById('input-weight').value);
+  const noteVal   = document.getElementById('input-note').value.trim();
+
+  if (!dateVal) { showToast('Please enter a date'); return; }
+  if (isNaN(weightVal) || weightVal <= 0) { showToast('Please enter a valid weight'); return; }
+
+  const entries = loadEntries();
+  entries.push({ date: dateVal, weight: weightVal, note: noteVal });
+  saveEntries(entries);
+
+  document.getElementById('input-weight').value = '';
+  document.getElementById('input-note').value   = '';
+
+  renderAll();
+  showToast('Weigh-in logged');
+});
+
+// ── SHOT TOGGLE ──
+document.getElementById('shot-toggle').addEventListener('change', function() {
+  const sunday = isSunday() ? todayISO() : thisSunday();
+  let shots    = loadShots();
+
+  if (this.checked) {
+    if (!shots.some(s => s.date === sunday)) {
+      shots.push({ date: sunday });
+      saveShots(shots);
+      showToast('Shot logged ✓');
+    }
+  } else {
+    shots = shots.filter(s => s.date !== sunday);
+    saveShots(shots);
+    showToast('Shot removed');
+  }
+
+  renderShots();
+});
+
+// ── INIT ──
+renderAll();
+window.addEventListener('resize', () => {
+  const entries = loadEntries();
+  renderChart(entries);
+});
+</script>
+</body>
+</html>
