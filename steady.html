@@ -269,6 +269,56 @@
     opacity: 0.5;
   }
 
+  /* ── MOTIVATION PICKER ── */
+  .motivation-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .motivation-picker {
+    display: flex;
+    gap: 10px;
+  }
+
+  .motivation-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 6px;
+    background: var(--parchment);
+    border: 1.5px solid var(--parchment-dim);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .motivation-btn span.mot-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .motivation-btn:hover { border-color: var(--amber-dim); background: white; }
+
+  .motivation-btn.selected-happy  { border-color: #4A9E70; background: #F0FAF4; }
+  .motivation-btn.selected-neutral{ border-color: var(--amber); background: #FDF8EE; }
+  .motivation-btn.selected-sad    { border-color: var(--warn); background: #FDF2EE; }
+
+  .history-mood {
+    font-size: 14px;
+    flex-shrink: 0;
+    width: 24px;
+    text-align: center;
+  }
+
   .btn-log {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 11px;
@@ -617,6 +667,20 @@
             <label class="form-label" for="input-note">Note (optional)</label>
             <textarea class="form-note" id="input-note" placeholder="How are you feeling..."></textarea>
           </div>
+          <div class="motivation-group">
+            <span class="form-label">Motivation</span>
+            <div class="motivation-picker">
+              <button type="button" class="motivation-btn" id="mot-happy" data-value="happy">
+                😊<span class="mot-label">Good</span>
+              </button>
+              <button type="button" class="motivation-btn" id="mot-neutral" data-value="neutral">
+                😐<span class="mot-label">Ok</span>
+              </button>
+              <button type="button" class="motivation-btn" id="mot-sad" data-value="sad">
+                😔<span class="mot-label">Low</span>
+              </button>
+            </div>
+          </div>
           <button class="btn-log" id="btn-log">Log Weigh-In</button>
         </div>
       </div>
@@ -827,8 +891,8 @@ function renderChart(entries) {
 
   const sorted = [...entries].sort((a,b) => a.date.localeCompare(b.date));
   const W = svg.parentElement.offsetWidth - 32;
-  const H = 120;
-  const PAD = { top: 12, right: 12, bottom: 24, left: 36 };
+  const H = 136;
+  const PAD = { top: 12, right: 12, bottom: 36, left: 36 };
   const iW  = W - PAD.left - PAD.right;
   const iH  = H - PAD.top  - PAD.bottom;
 
@@ -871,13 +935,18 @@ function renderChart(entries) {
     <path d="${areaPath}" fill="url(#area-grad)"/>
     <!-- Line -->
     <path d="${linePath}" stroke="#4A7A5E" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    <!-- Dots + amber waypoint on last -->
+    <!-- Dots + amber waypoint on last + mood indicators -->
     ${pts.map((p, i) => {
       const isLast = i === pts.length - 1;
-      if (isLast) {
-        return `<circle cx="${p[0]}" cy="${p[1]}" r="5" fill="#D4B06A" stroke="white" stroke-width="1.5"/>`;
-      }
-      return `<circle cx="${p[0]}" cy="${p[1]}" r="2.5" fill="#4A7A5E" opacity="0.6"/>`;
+      const mood = sorted[i].mood;
+      const moodColor = mood === 'happy' ? '#4A9E70' : mood === 'sad' ? '#B85C3A' : mood === 'neutral' ? '#D4B06A' : null;
+      const dot = isLast
+        ? `<circle cx="${p[0]}" cy="${p[1]}" r="5" fill="#D4B06A" stroke="white" stroke-width="1.5"/>`
+        : `<circle cx="${p[0]}" cy="${p[1]}" r="2.5" fill="#4A7A5E" opacity="0.6"/>`;
+      const moodDot = moodColor
+        ? `<circle cx="${p[0]}" cy="${PAD.top + iH + 8}" r="3.5" fill="${moodColor}" opacity="0.75"/>`
+        : '';
+      return dot + moodDot;
     }).join('')}
     <!-- X axis date labels (first and last) -->
     <text x="${pts[0][0]}" y="${H - 4}" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="8" fill="#6B8F79" opacity="0.7">${formatDate(sorted[0].date)}</text>
@@ -910,11 +979,14 @@ function renderHistory(entries) {
       else { deltaStr = '±0.0'; deltaClass = 'flat'; }
     }
 
+    const moodEmoji = entry.mood === 'happy' ? '😊' : entry.mood === 'neutral' ? '😐' : entry.mood === 'sad' ? '😔' : '';
+
     return `
       <div class="history-row">
         <span class="history-date">${formatDate(entry.date)}</span>
         <span class="history-weight">${entry.weight.toFixed(1)}</span>
         <span class="history-delta ${deltaClass}">${deltaStr}</span>
+        <span class="history-mood">${moodEmoji}</span>
         <span class="history-note">${entry.note || ''}</span>
         <button class="btn-delete" data-date="${entry.date}" data-weight="${entry.weight}" title="Delete">×</button>
       </div>
@@ -988,6 +1060,19 @@ function renderAll() {
   renderShots();
 }
 
+// ── MOTIVATION PICKER ──
+let selectedMood = null;
+
+document.querySelectorAll('.motivation-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.motivation-btn').forEach(b => {
+      b.classList.remove('selected-happy', 'selected-neutral', 'selected-sad');
+    });
+    selectedMood = btn.dataset.value;
+    btn.classList.add(`selected-${selectedMood}`);
+  });
+});
+
 // ── LOG FORM ──
 document.getElementById('input-date').value = todayISO();
 
@@ -1000,11 +1085,15 @@ document.getElementById('btn-log').addEventListener('click', () => {
   if (isNaN(weightVal) || weightVal <= 0) { showToast('Please enter a valid weight'); return; }
 
   const entries = loadEntries();
-  entries.push({ date: dateVal, weight: weightVal, note: noteVal });
+  entries.push({ date: dateVal, weight: weightVal, note: noteVal, mood: selectedMood });
   saveEntries(entries);
 
   document.getElementById('input-weight').value = '';
   document.getElementById('input-note').value   = '';
+  selectedMood = null;
+  document.querySelectorAll('.motivation-btn').forEach(b => {
+    b.classList.remove('selected-happy', 'selected-neutral', 'selected-sad');
+  });
 
   renderAll();
   showToast('Weigh-in logged');
