@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://apis.google.com/js/api.js" async defer onload="gapiLoaded()"></script>
 <style>
   :root {
     --forest-deep:   #1F3329;
@@ -112,6 +114,40 @@
     height: 2px;
     background: linear-gradient(90deg, transparent 0%, var(--amber-dim) 20%, var(--amber) 50%, var(--amber-dim) 80%, transparent 100%);
   }
+
+  /* ── SYNC BAR ── */
+  .sync-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px;
+    padding: 8px 16px;
+    background: var(--forest-mid);
+    border-bottom: 1px solid rgba(212,176,106,0.12);
+    font-size: .7rem;
+  }
+  .sync-status { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,.35); }
+  .sync-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: rgba(255,255,255,.18); flex-shrink: 0; transition: background .3s;
+  }
+  .sync-dot.connected { background: #5aab7a; }
+  .sync-dot.saving    { background: var(--amber); animation: pulse .8s infinite; }
+  .sync-dot.error     { background: #b05050; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+  .sync-actions { display: flex; gap: 8px; }
+  .btn-sync {
+    font-family: inherit; font-size: .62rem; font-weight: 500;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: 5px 16px; border-radius: 20px;
+    border: 1px solid rgba(212,176,106,0.35);
+    background: transparent; color: var(--amber-light);
+    cursor: pointer; transition: all .18s;
+  }
+  .btn-sync:hover { border-color: var(--amber); color: var(--amber); }
+  .btn-sync.primary {
+    background: var(--amber); border-color: var(--amber);
+    color: var(--forest-deep); font-weight: 500;
+  }
+  .btn-sync.primary:hover { background: var(--amber-light); }
 
   /* ── STATS BAR ── */
   .stats-bar {
@@ -624,6 +660,19 @@
 </header>
 <div class="header-rule"></div>
 
+<!-- SYNC BAR -->
+<div class="sync-bar">
+  <div class="sync-status">
+    <div class="sync-dot" id="sync-dot"></div>
+    <span id="sync-label">Not connected</span>
+  </div>
+  <div class="sync-actions">
+    <button class="btn-sync" onclick="resetLocalData()">Reset local data</button>
+    <button class="btn-sync" id="btn-signout" style="display:none" onclick="signOut()">Sign out</button>
+    <button class="btn-sync primary" id="btn-signin" onclick="signIn()">Connect Google Drive</button>
+  </div>
+</div>
+
 <!-- STATS BAR -->
 <div class="stats-bar" id="stats-bar">
   <div class="stat-item">
@@ -1128,6 +1177,7 @@ document.getElementById('btn-log').addEventListener('click', () => {
   });
 
   renderAll();
+  scheduleSave();
   showToast('Weigh-in logged');
 });
 
@@ -1140,19 +1190,122 @@ document.getElementById('shot-toggle').addEventListener('change', function() {
     if (!shots.some(s => s.date === sunday)) {
       shots.push({ date: sunday });
       saveShots(shots);
+      scheduleSave();
       showToast('Shot logged ✓');
     }
   } else {
     shots = shots.filter(s => s.date !== sunday);
     saveShots(shots);
+    scheduleSave();
     showToast('Shot removed');
   }
 
   renderShots();
 });
 
-// ── INIT ──
-renderAll();
+// ── GOOGLE DRIVE SYNC ──────────────────────────────────────────────────────
+const CONFIG = {
+  CLIENT_ID: '714545608495-qjrpqic57gi549kh9nfhpl53shlf78s8.apps.googleusercontent.com',
+  API_KEY:   'AIzaSyC0mBVjHBEc2KsBfRodnArfcqoO1BZ1qZI',
+};
+const DRIVE_FILENAME = 'steady-data.json';
+const SCOPES = 'https://www.googleapis.com/auth/drive.file';
+
+let tokenClient, driveFileId = null, saveTimer = null, gapiReady = false, gsiReady = false;
+const configOk = CONFIG.CLIENT_ID !== 'YOUR_CLIENT_ID' && CONFIG.API_KEY !== 'YOUR_API_KEY';
+
+function gapiLoaded() {
+  gapi.load('client', async () => {
+    await gapi.client.init({ apiKey: CONFIG.API_KEY, discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'] });
+    gapiReady = true; maybeInitGSI();
+  });
+}
+function maybeInitGSI() {
+  if (!configOk) return;
+  tokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: CONFIG.CLIENT_ID, scope: SCOPES,
+    callback: async (resp) => {
+      if (resp.error) { setSyncStatus('error', 'Auth error: ' + resp.error); return; }
+      setSyncStatus('saving', 'Signed in — loading data…');
+      await findOrCreateFile(); await loadFromDrive();
+    }
+  });
+  gsiReady = true;
+  const tok = sessionStorage.getItem('steady_drive_token');
+  if (tok) { gapi.client.setToken(JSON.parse(tok)); findOrCreateFile().then(loadFromDrive); }
+}
+function signIn() {
+  if (!configOk) { alert('Add Google Cloud credentials to the CONFIG block first.'); return; }
+  if (!gapiReady || !gsiReady) { alert('Google APIs still loading — try again.'); return; }
+  tokenClient.requestAccessToken({ prompt: '' });
+}
+function signOut() {
+  const t = gapi.client.getToken();
+  if (t) google.accounts.oauth2.revoke(t.access_token, () => {});
+  gapi.client.setToken(null);
+  sessionStorage.removeItem('steady_drive_token');
+  driveFileId = null;
+  setSyncStatus('disconnected', 'Not connected');
+  document.getElementById('btn-signin').style.display = '';
+  document.getElementById('btn-signout').style.display = 'none';
+}
+async function findOrCreateFile() {
+  const token = gapi.client.getToken();
+  const sr = await fetch(`https://www.googleapis.com/drive/v3/files?q=name%3D'${DRIVE_FILENAME}'%20and%20trashed%3Dfalse&fields=files(id,name)`, { headers: { 'Authorization': 'Bearer ' + token.access_token } });
+  const sd = await sr.json(); const files = sd.files || [];
+  if (files.length > 0) { driveFileId = files[0].id; }
+  else {
+    const cr = await fetch('https://www.googleapis.com/drive/v3/files?fields=id', { method: 'POST', headers: { 'Authorization': 'Bearer ' + token.access_token, 'Content-Type': 'application/json' }, body: JSON.stringify({ name: DRIVE_FILENAME, mimeType: 'application/json' }) });
+    driveFileId = (await cr.json()).id;
+  }
+  sessionStorage.setItem('steady_drive_token', JSON.stringify(gapi.client.getToken()));
+  document.getElementById('btn-signin').style.display = 'none';
+  document.getElementById('btn-signout').style.display = '';
+}
+async function loadFromDrive() {
+  if (!driveFileId) return;
+  setSyncStatus('saving', 'Loading from Drive…');
+  try {
+    const token = gapi.client.getToken();
+    const res = await fetch(`https://www.googleapis.com/drive/v3/files/${driveFileId}?alt=media`, { headers: { 'Authorization': 'Bearer ' + token.access_token } });
+    if (!res.ok) throw new Error('fetch failed');
+    const text = await res.text();
+    if (text && text.trim().startsWith('{')) {
+      const data = JSON.parse(text);
+      if (data.entries) localStorage.setItem(STORAGE_KEY, JSON.stringify(data.entries));
+      if (data.shots)   localStorage.setItem(SHOTS_STORAGE_KEY, JSON.stringify(data.shots));
+      renderAll();
+    }
+    setSyncStatus('connected', 'Synced with Google Drive');
+  } catch(e) { await saveToDrive(); }
+}
+async function saveToDrive() {
+  if (!driveFileId) return;
+  setSyncStatus('saving', 'Saving…');
+  try {
+    const token = gapi.client.getToken();
+    const payload = { entries: loadEntries(), shots: loadShots() };
+    await fetch(`https://www.googleapis.com/upload/drive/v3/files/${driveFileId}?uploadType=media`, { method: 'PATCH', headers: { 'Authorization': 'Bearer ' + token.access_token, 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    setSyncStatus('connected', 'Saved — ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    sessionStorage.setItem('steady_drive_token', JSON.stringify(gapi.client.getToken()));
+  } catch(e) { setSyncStatus('error', 'Save failed'); }
+}
+function scheduleSave() { if (!driveFileId) return; clearTimeout(saveTimer); saveTimer = setTimeout(saveToDrive, 1200); }
+function setSyncStatus(state, label) {
+  const dot = document.getElementById('sync-dot');
+  document.getElementById('sync-label').textContent = label;
+  dot.className = 'sync-dot';
+  if (state === 'connected') dot.classList.add('connected');
+  else if (state === 'saving') dot.classList.add('saving');
+  else if (state === 'error') dot.classList.add('error');
+}
+function resetLocalData() {
+  if (!confirm('Clear cached data and reload?')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(SHOTS_STORAGE_KEY);
+  location.reload();
+}
+
 window.addEventListener('resize', () => {
   const entries = loadEntries();
   renderChart(entries);
