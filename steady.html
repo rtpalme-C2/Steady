@@ -520,62 +520,21 @@
     color: var(--text-muted);
   }
 
-  /* toggle */
-  .toggle-wrap {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .toggle-label {
+  .btn-log-shot {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 9px;
+    font-size: 11px;
+    font-weight: 500;
     letter-spacing: 0.1em;
-    color: var(--text-muted);
-  }
-
-  .toggle {
-    position: relative;
-    width: 38px;
-    height: 22px;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--amber-dim);
+    background: transparent;
+    color: var(--amber);
     cursor: pointer;
+    transition: all .18s;
   }
-
-  .toggle input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-    position: absolute;
-  }
-
-  .toggle-slider {
-    position: absolute;
-    inset: 0;
-    background: var(--parchment-dim);
-    border-radius: 11px;
-    transition: background 0.2s;
-  }
-
-  .toggle-slider::before {
-    content: '';
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    left: 3px;
-    top: 3px;
-    background: white;
-    border-radius: 50%;
-    transition: transform 0.2s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-  }
-
-  .toggle input:checked + .toggle-slider {
-    background: var(--forest-light);
-  }
-
-  .toggle input:checked + .toggle-slider::before {
-    transform: translateX(16px);
-  }
+  .btn-log-shot:hover { background: var(--amber); color: var(--forest-deep); }
 
   .shot-log {
     display: flex;
@@ -777,10 +736,7 @@
           <span class="shot-title">Weekly Injection</span>
           <span class="shot-subtitle" id="shot-next-label">Next Sunday</span>
         </div>
-        <label class="toggle" title="Mark this Sunday's shot as done">
-          <input type="checkbox" id="shot-toggle">
-          <span class="toggle-slider"></span>
-        </label>
+        <button class="btn-log-shot" onclick="openShotModal()">+ Log Shot</button>
       </div>
       <div class="shot-log" id="shot-log">
         <div class="shot-log-empty" id="shot-log-empty">No shots logged yet</div>
@@ -1110,44 +1066,93 @@ function renderHistory(entries) {
 
 // ── SHOT TRACKER ──
 function renderShots() {
-  const shots     = loadShots();
-  const toggle    = document.getElementById('shot-toggle');
-  const logEl     = document.getElementById('shot-log');
-  const emptyEl   = document.getElementById('shot-log-empty');
+  const shots   = loadShots();
+  const logEl   = document.getElementById('shot-log');
+  const emptyEl = document.getElementById('shot-log-empty');
   const nextLabel = document.getElementById('shot-next-label');
 
-  // determine this week's Sunday
-  const sunday = isSunday() ? todayISO() : thisSunday();
-  const alreadyLogged = shots.some(s => s.date === sunday);
-
-  toggle.checked = alreadyLogged;
-
-  // label
-  if (isSunday()) {
-    nextLabel.textContent = alreadyLogged ? 'Done today ✓' : 'Today';
-  } else {
-    const d = new Date(nextSunday() + 'T12:00:00');
-    nextLabel.textContent = `Next: ${formatDate(nextSunday())}`;
-  }
+  // next Sunday label
+  const next = nextSunday();
+  const d = new Date(next + 'T12:00:00');
+  nextLabel.textContent = `Next: ${formatDate(next)}`;
 
   // log
   const recent = [...shots].sort((a,b) => b.date.localeCompare(a.date)).slice(0, 8);
+  logEl.querySelectorAll('.shot-row').forEach(r => r.remove());
+
   if (!recent.length) {
     if (emptyEl) emptyEl.style.display = 'block';
-    logEl.querySelectorAll('.shot-row').forEach(r => r.remove());
     return;
   }
   if (emptyEl) emptyEl.style.display = 'none';
 
-  // remove old rows
-  logEl.querySelectorAll('.shot-row').forEach(r => r.remove());
   recent.forEach(s => {
     const row = document.createElement('div');
     row.className = 'shot-row';
     const dosageLabel = s.dosage != null ? `${s.dosage} mg` : '—';
-    row.innerHTML = `<span>${formatDate(s.date)}</span><span style="color:var(--text-muted);font-size:.78rem;">${dosageLabel}</span><span class="shot-check">✓</span>`;
+    row.innerHTML = `
+      <span>${formatDate(s.date)}</span>
+      <span style="color:var(--text-muted);font-size:.78rem;">${dosageLabel}</span>
+      <button onclick="deleteShot('${s.date}')" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:12px;padding:0 2px;line-height:1;" title="Remove">&times;</button>`;
     logEl.appendChild(row);
   });
+}
+
+function deleteShot(date) {
+  if (!confirm('Remove this shot entry?')) return;
+  let shots = loadShots().filter(s => s.date !== date);
+  saveShots(shots);
+  scheduleSave();
+  renderShots();
+}
+
+function openShotModal() {
+  const shots = loadShots();
+  const lastDosage = shots.length > 0
+    ? [...shots].sort((a,b) => b.date.localeCompare(a.date))[0].dosage ?? ''
+    : '';
+
+  const overlay = document.createElement('div');
+  overlay.id = 'shot-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(10,20,15,.65);z-index:2000;display:flex;align-items:center;justify-content:center;padding:1rem;';
+  overlay.innerHTML = `
+    <div style="background:var(--parchment);border-top:3px solid var(--amber);border-radius:12px;padding:24px;width:min(340px,90vw);box-shadow:0 20px 60px rgba(0,0,0,.4);">
+      <div style="font-size:1rem;font-weight:500;color:var(--forest-deep);margin-bottom:1rem;">Log Shot</div>
+      <label style="display:block;font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-muted);margin-bottom:.3rem;">Date</label>
+      <input type="date" id="shot-date-input" value="${todayISO()}"
+        style="width:100%;padding:8px 12px;border:1px solid var(--parchment-dim);border-radius:6px;font-family:inherit;font-size:.9rem;color:var(--text-primary);background:white;outline:none;margin-bottom:.85rem;">
+      <label style="display:block;font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-muted);margin-bottom:.3rem;">Dosage (mg)</label>
+      <input type="number" id="shot-dosage-input" value="${lastDosage}" step="0.25" min="0" placeholder="e.g. 0.5"
+        style="width:100%;padding:8px 12px;border:1px solid var(--parchment-dim);border-radius:6px;font-family:inherit;font-size:1rem;color:var(--text-primary);background:white;outline:none;margin-bottom:1rem;">
+      <div style="display:flex;gap:.75rem;">
+        <button onclick="closeShotModal()" style="flex:1;padding:8px;border:1px solid var(--parchment-dim);border-radius:6px;background:white;font-family:inherit;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;color:var(--text-muted);">Cancel</button>
+        <button onclick="confirmShot()" style="flex:2;padding:8px;border:none;border-radius:6px;background:var(--forest-deep);color:var(--amber-light);font-family:inherit;font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Log Shot</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+  setTimeout(() => document.getElementById('shot-dosage-input').focus(), 50);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeShotModal(); });
+}
+
+function closeShotModal() {
+  const el = document.getElementById('shot-overlay');
+  if (el) el.remove();
+}
+
+function confirmShot() {
+  const date    = document.getElementById('shot-date-input').value;
+  const val     = document.getElementById('shot-dosage-input').value.trim();
+  const dosage  = val !== '' ? parseFloat(val) : null;
+  if (!date) { document.getElementById('shot-date-input').focus(); return; }
+  let shots = loadShots();
+  // replace if same date already exists
+  shots = shots.filter(s => s.date !== date);
+  shots.push({ date, dosage });
+  saveShots(shots);
+  scheduleSave();
+  showToast('Shot logged \u2713');
+  closeShotModal();
+  renderShots();
 }
 
 // ── RENDER ALL ──
@@ -1198,83 +1203,6 @@ document.getElementById('btn-log').addEventListener('click', () => {
   scheduleSave();
   showToast('Weigh-in logged');
 });
-
-// ── SHOT TOGGLE ──
-document.getElementById('shot-toggle').addEventListener('change', function() {
-  const sunday = isSunday() ? todayISO() : thisSunday();
-  let shots    = loadShots();
-
-  if (this.checked) {
-    // Uncheck immediately — will re-check after dosage is confirmed
-    this.checked = false;
-    if (!shots.some(s => s.date === sunday)) {
-      openDosageModal(sunday);
-    }
-  } else {
-    shots = shots.filter(s => s.date !== sunday);
-    saveShots(shots);
-    scheduleSave();
-    showToast('Shot removed');
-    renderShots();
-  }
-});
-
-function openDosageModal(date) {
-  // Get last dosage as default
-  const shots = loadShots();
-  const lastDosage = shots.length > 0
-    ? [...shots].sort((a,b) => b.date.localeCompare(a.date))[0].dosage || ''
-    : '';
-
-  const overlay = document.createElement('div');
-  overlay.id = 'dosage-overlay';
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(10,20,15,.65);z-index:2000;display:flex;align-items:center;justify-content:center;padding:1rem;';
-  overlay.innerHTML = `
-    <div style="background:var(--parchment);border-top:3px solid var(--amber);border-radius:12px;padding:24px;width:min(340px,90vw);box-shadow:0 20px 60px rgba(0,0,0,.4);">
-      <div style="font-size:1rem;font-weight:500;color:var(--forest-deep);margin-bottom:.3rem;">Log Shot</div>
-      <div style="font-size:.75rem;color:var(--text-secondary);margin-bottom:1rem;">${formatDate(date)}</div>
-      <label style="display:block;font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-muted);margin-bottom:.3rem;">Dosage (mg)</label>
-      <input type="number" id="dosage-input" value="${lastDosage}" step="0.25" min="0" placeholder="e.g. 0.5"
-        style="width:100%;padding:8px 12px;border:1px solid var(--parchment-dim);border-radius:6px;font-family:inherit;font-size:1rem;color:var(--text-primary);background:white;outline:none;margin-bottom:1rem;">
-      <div style="display:flex;gap:.75rem;">
-        <button onclick="closeDosageModal()" style="flex:1;padding:8px;border:1px solid var(--parchment-dim);border-radius:6px;background:white;font-family:inherit;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;color:var(--text-muted);">Cancel</button>
-        <button onclick="confirmDosage('${date}')" style="flex:2;padding:8px;border:none;border-radius:6px;background:var(--forest-deep);color:var(--amber-light);font-family:inherit;font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Log Shot</button>
-      </div>
-    </div>`;
-  document.body.appendChild(overlay);
-  setTimeout(() => document.getElementById('dosage-input').focus(), 50);
-
-  overlay.addEventListener('click', e => { if (e.target === overlay) closeDosageModal(); });
-  document.addEventListener('keydown', dosageKeyHandler);
-}
-
-function dosageKeyHandler(e) {
-  if (e.key === 'Escape') closeDosageModal();
-  if (e.key === 'Enter') {
-    const d = document.getElementById('dosage-input');
-    if (d) { e.preventDefault(); confirmDosage(d.closest('[onclick]') ? '' : currentDosageDate); }
-  }
-}
-
-function closeDosageModal() {
-  const el = document.getElementById('dosage-overlay');
-  if (el) el.remove();
-  document.removeEventListener('keydown', dosageKeyHandler);
-  renderShots();
-}
-
-function confirmDosage(date) {
-  const val = document.getElementById('dosage-input').value.trim();
-  const dosage = val !== '' ? parseFloat(val) : null;
-  let shots = loadShots();
-  if (!shots.some(s => s.date === date)) {
-    shots.push({ date, dosage });
-    saveShots(shots);
-    scheduleSave();
-    showToast('Shot logged ✓');
-  }
-  closeDosageModal();
-}
 
 // ── GITHUB SYNC ──────────────────────────────────────────────────────────────
 const GH_OWNER   = 'rtpalme-C2';
