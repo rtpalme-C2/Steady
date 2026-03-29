@@ -1321,9 +1321,7 @@ async function savePAT() {
 }
 
 function disconnectGitHub() {
-  if (!confirm('Remove GitHub token from this browser?
-
-Local data will be kept.')) return;
+  if (!confirm('Remove GitHub token from this browser?\n\nLocal data will be kept.')) return;
   localStorage.removeItem(LS_PAT);
   localStorage.removeItem(LS_SHA);
   updateSetupBanner();
