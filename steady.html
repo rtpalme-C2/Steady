@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Steady">
 <title>Steady · Chapter 1 · Health</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTYwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCI+CiAgPHJlY3Qgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxNjAiIHJ4PSIzNCIgZmlsbD0iIzFGMzMyOSIvPgogIDxlbGxpcHNlIGN4PSI4MiIgY3k9IjEzOCIgcng9IjUyIiByeT0iMjYiIGZpbGw9IiMxODJEMjIiLz4KICA8ZWxsaXBzZSBjeD0iODIiIGN5PSIxMjQiIHJ4PSI1MiIgcnk9IjI2IiBmaWxsPSIjM0Q1RTRBIi8+CiAgPGVsbGlwc2UgY3g9Ijc2IiBjeT0iOTYiICByeD0iMzciIHJ5PSIyMiIgZmlsbD0iIzE4MkQyMiIvPgogIDxlbGxpcHNlIGN4PSI3NiIgY3k9Ijg0IiAgcng9IjM3IiByeT0iMjIiIGZpbGw9IiM0QTdBNUUiLz4KICA8ZWxsaXBzZSBjeD0iODYiIGN5PSI2MCIgIHJ4PSIyNCIgcnk9IjE4IiBmaWxsPSIjMTgyRDIyIi8+CiAgPGVsbGlwc2UgY3g9Ijg2IiBjeT0iNDkiICByeD0iMjQiIHJ5PSIxOCIgZmlsbD0iI0Q0QjA2QSIvPgo8L3N2Zz4K">
-<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAABmJLR0QA/wD/AP+gvaeTAAAaOklEQVR4nO2deXAc2X3fP6+75z4xOAkSB48lCR7a1WJPr3a9iu1YqdKulXJtIsk5KnGVUuUql2OpShXbkZNNHP+RxGWrHKXiSiS7FMdRSkkk2StZsSNpvYq8B4nd4pIglktgQdwgBsDc93S//AGSAkkAxAAz0wf6U7W1mJnufr/p+fL17733e7+fwAyef14byCw9ogpxzhDKSSE5iZDDIDpARoAQEDTFNpfdkgcyQBpJBsE4Qr5rGMoln6d6afLNyawZRol2NXTsidMndZ2Pg/go8BwQbVfbLm2nDvI1ifhToRp/OvPWtel2NdxSQR95+mxCrRqfBP4+8FQr23KxMILXBfL3O2Xof46NjdVa21QLOPrhkSFD4fPAPwb8rWjDxZYsIfhSsaR8MTk+nm9FA00V9LHRs4N15MsC+QuAp5nXdnEUy1LKfzEb7fsKr75ab+aFmyLo0dFRT5LiZwV8gY0BnYvLbrgqhfGZ2YvXftSsC+5b0MOPjjwlBV8BRppgj8vBQxeS39Gytd+cnJys7Pdi+xG0GBo98zmQv43rXrjsEwGXDUP55Ow741f3eZ3GGTx/vkN4618FPr6fxl1c7iELfHpmbOLbe72A2ugJQ6Mjh4Sq/yWI5/baqIvLNviAT3Uc7hHpxeSre7lAQ4IefPzkMSGVH4Bw/WWXViGA52P93X2ZpdXvNHryrgV97InTJ6UhfgRioNFGXFwaRcBj8f6uRGZp9buNnLcrQR95+ORhhPIDEIf3Zp6Ly14QT8b7u7sb6akfKOjB8+c7FA/fA07uyzYXl73xePxQTy2zlPzhbg5+kKBFbKDzv4uNYCIXF3MQ/I34oZ7JzFLy8oMOVXb6cGj0zOcE/FzzLHNx2RMCIf/L8OiZJx984DbcWgF8DXfRxMU6TKtUPvzB2AeZ7Q7Ysoc+e/asVwq+jCtmF2tx1MD3n3c6YEtB5/zGrwJnWmKSi8s+kPDS8Ojpf7jd5/e5HMcfPzdQN/SrQLillrm47J31GvqpxbH3V+/94L4eumYY/wpXzC7WJuEV2r/Z6oO7euhbO02u4/rOLtbHUITy9PTF8bc2v6ncfQSfxxWziz1QpDR+69437/TQh5843anpYh53D6CLnVDkMzMX3vvrOy9v/6HVxSdxxexiM6Sh/Obm1z92OQR/r+3WuLjsE4H82cHHz5y9/VqBjdBQ3LwZLjZF6PIXb/+tAOg6L5hnjovLPhH8gxMnTvjgjsshnjfRHBeX/dJZj3s/BqDw/PMabnioi80xDONvASgDmaVHcBMnutgcIcSGoFVFnH3QwS4uNmBw6NFzI4qBcspsS1xcmoPxqCKEdAXt4giEkOc1JEfNNuQgEvCqqKog5PNQrevUdINSRUc3pNmm2RYJ5zUQMXBvYqs40hXiVH+E431hBnvC9MR8dEf9eLWtt3Om8lWS2QrLqSJTS3mmlnNMLGQpV/U2W25LBsXQ6MgK0G22JU5BEYKHj3bwkZFuRo930h3z7fuatbrB1bksb11f5bXxm6znq02w1InIeTE0OlIEAmabYnfiIS8vPnGEn3nkEImwt2XtGFLyzlSKb12Y4+2pdaT7cN1MXgyNjri3ZB/EQh4+/exR/uaHD23rRrSKGyt5vvqDad68fyfSgcUV9B5RhOATTw7wqeeGCPo0U225NJ3mS9+5xsJ60VQ7rIAr6D3QGw/wuU+McHYgZrYpd6jUDP7oe5P82cWFA+2GuIJukHODMX7jpXNEg63zk/fDD8dX+N0/m6BSM8w2xRTMfVbajI+e7+VXXxxBVdpWr7Rhnj3bQ3fMxxf+5F2KlaYWmLIF7R3F2JiPnu/lsz9nbTHf5vSRGP/60w8T8DZcoMH2uILeBSNHYvzTF0ZQhPXFfJvTR6L82s+fs5XNzcAV9AOIh7x84e+cR1PtJ4zREwn+7keGzDajrbiCfgD/5GMPEQvZN1XJp54b5ljvwUmE5Qp6Bz403MFzZ3rMNmNfqIrgMz97wmwz2oYr6B34hZ8cNtuEpnB+qINzg9aZM28lrqC3Ybg3zLnBuNlmNI0XnjgYxctcQW/DT9rc1biXJx7qNH2Jvh24gt6GR48nzDahqXg1hbMHwO1wBb0FmioY7nHezMBDhyJmm9ByXEFvQU/Mb8t55wdxKOH8sHdX0FsQ9jvT14z47TufvltcQW+BojjztqjO/Fp3cQC+YuPky86MUsuWnPm9NuMKegvWcxUMB0bJr2UrZpvQclxBb0GxUmdpvWS2GU3n+lLObBNajivobXh3Jm22CU3FkJKrc9tWFHYMrqC34f9dXTHbhKZyZSbNWs51OQ4s706nmF9zzi7q7769YLYJbcEV9DbUDYOvvTZlthlNYXG9yPffXTTbjLbgCnobdEPnL95Z5Ppi1mxT9s0ffPc96rqBdODMzb24gt4GQxoYUvLvv3mFuo0zgv7g8hI/mtgYDxjS+akNXEFvxy0NTy1l+Q/fvmquLXtkfrXA731r/M5rw3AFfSCR9/zwr7w1xzdenzHJmr2Rylf45388RuGA5eZwBb0VWwTa/cc/n+Cbb9hD1OlClc//4QVHzdLsFjXe3/0vzTbCakjklo/nC5OrVGs6jxzrRFg038X8WpHP/9EFZpOF+z4TQqAqzk4+48w4yX2iiK0fXFLC1344zdxqgc9+4jyxoLXCMV8bX+Z3vnFlWzfDqv8Im4mbrHEbqtXKjoU6EhEfv/LCWZ4ZMX/vYaZY5UuvTPD9y0s7HqdpmuN7aFfQ96D6NMKJGLlUhlL2/sf2vYwe7+QzHzvF8b721y6t1gy+8eYMf/Lq1K4Gf16P1/G9tCtoIBALEemJE+6M4Y8GEUKwOrvM7KXJXZ0vBDx5soeXnhnm4aOt31ybLdZ45cIs33xzlvVdxmcIIfB6rJkCuJkcWEFrfi8dhzqJH+nCG/Tf97lerXH5/17E0BurPnWkM8RPP9LP8+f6ONIVapa5lKt1xqbW+ctLC7x5LUmt3ticsqZoqJqz3Q04gIIOdoRJDPYR7Ysjtpqf28T8lQ9Ymd57DERvPMCjxzsZORLjof4Ywz1hPLusw7KWrXB9KcP1xRyXbqwxPptuWMR3EODVnO9uwAESdLQ3Qc/xQ/giwV2fUytXufrqGHqtOTUChYBEeKNOYSjgIezX0FSFum5Q1w3y5TpruQor6TLVevPqEqqqiqYejAktx3/LQDxM78kBQh2N59nw+L30nx5m7nJzou6khLVcpa1xyUIINNX5rsZtHCto1aPS89AREgP7m1brGuoju5Iic3O9SZa1F03zsOXSp0Nx5NJ3tLeDEx/50L7FDBs93PCjJ/E34KpYBU3V3Az+dkYg6Dl5hIFHTqB5m/fwUTWNh54+ZytRxw91oWqOfQBvi2MErXpUhh47RffRQy25vsfn5aGnzhGMNm8qrhUIBAPnjnHssdMMjZ5E9Rwc/xkcIujbYg51tjYZocfv5eQzDxM/1NnSdvaK6tE4/tQZuo/2AxDujDL8+Gk0z8HpqW0/bad5NIYfP9XQdFwzSC2uMvvuJHrNGvHGke4Ohh8+gSfgu++zcq7IjQvXLGNrK7G1oAWCwdGHCHeZk/e4Vqow/94MqXnzUh54Az76R4ZJHO7e8bj8WpbZsWuOL5tsa0H3nRqkc7jXbDMoZvIsX58ns7SG3DFGr3l4gz56jh6ma7hv18kl124ss3xtrsWWmYttnatgImIJMQMEY2GOPXaaSqHM2uxN1hdXqBabv3gihCDa00HnQA+xvi4anZHrHO4jl8xQWLf/TvbtsGUPLRTB8afP4QvfH1RkBaSUFNM5sskM2WSKUjq/5w2q3oCPcGeMWHecSE9i39ORlXyZqdevIG28k30nbNlDdxzptqyYYaMnDXVECXVEOXRyACmhnCtQyhWplirUShXq1RqGbtzZkKt6NISi4A348Aa8eIMBgrFwU+fTAXxhP/H+LlLzyaZe1yrYUtCJQfN3iTSCEBCIhghYZA67c6jPsYK23Tx0KBHFF3J+rZBW4gv7CXY4s4CQ7QQd7m7/VicnEuly5n20naBDHc78IdpNqNOZNQttJ2hf2HU3moFT3TZbCVpRFZSDUMqpDSiaM++lrb6ReoCCbNqBE++nrQR9EIJr2oledd79tJWgDd3A0J2fErYdGLruyPS6thI0QKXgvHJrZlDJOfM+2k7Q+TXnBta0k8K6M2sW2k7QhVVX0M0gt+bMmoX2E/R6lnLu4CXybiaVXImi20Nbh+TMstkm2Jr9pDezOrYTtESyOrtE2aGDmlZTzhVZnV12bIk32wnaMAykLpl997rZptiSuStTSCldQVsF49ZOi/x6lpWpg1Hut1ncnJwnt7oxGDSM5iWDtBK2E/TmkmsLV2+QXUmZaI19yCbTLE78uIqX7tAinPYT9KZd1RLJ9DvvU8rkTbTI+hQzBabH3rt7R7ozPQ57CXqrFAF6tcb7r1+hkHbmNNR+KWYKTL5xecs4GCdq2laC3i4trF6rM/nGONlkus32WJtcMsX1v75MfZsgJCfmJbWVoHf6AfRanak3xlmenG+bPVZmeXKeyTeuotedF1G3E7YLiBWIbbMTSSSLEzcoprIMnD+Bx+/8qk/3Uq1UmLs09eAE7U7snrGjoBUF+YApp/TyOrm1tzk8MkzXUF+bLDOf1OIqc5cnt3UxNqNuUy3X7tguc5Ku69T13T9GQ/EIh88ME3boplCAQirLwsQM+QYCjjyahuLAqrK2E7QEqrVKw0P0eF+CvpNDBGPWSPbSDIqZPMvX5kjfXGv4XK/X+8CydnbEfi4HG4/LRhcG0svrpJfXCSWi9BztJ97facsfVEpJbjVDcnpxz4WMVFW15XffDbbroWHjR63Wqvu6hsfvpeNQF50DPQRijZd8azflXJHU4irr8ytUiuU9X0cI6OzrplwoUyvv7x5aEVsKGqCu19EbLFu8HcFYiFhfJ9GeDoKxsCUqrkopKWbyZG9uPFlK2UJTrtvRk6Dr8EZuwGq5SjGdI58pYDSx0KeZ2FbQANVqtekJxjWvh2hXjGAiSjAeIRQLIXaZUHw/SN2gkC1QTOUopLPkkuldzVY0gsfrZXBk+P4E6VJSyBbIJtPUKrWmttlubC1oQxrUanVauYgrFIE/EsIf9uMPBfCFg3iDfjw+Dx6fB6WBKq2GrlOr1KiVa1RLZcr5IpV8mXKhRDlbaGlIpxAKAycH8QV3SEMsJaV8iWwyQ6W0d7fGTGwtaADdMKjXzetVFE3B490oDK9oKoiNQkb1Wh0kGHUdKSW1Sg2jSS5SwwjBoeF+wvHdZxwtF0qkltdt52fbWtDBaJBYbyelXIGbc8s4viLOHhAIeob6iCYan4eXbOzhzCTT6DbxsW03bQegaiqJ/i4Ct0q5eTpjCCG4ObPoyAiyvSKA3qE+InsQ8+3zw4kowViY9EqKvA1qs9hO0MFoiER/132JBiOJKJpXY2l68cAF5GyFqqr0HT1MsAn1GxVVIXGok2AkyPpCkrqFe2vbuBxCEXT2dz9wpa9erbF0Y4FywZ6DmmbgDwY4dPRw0+uzwEbowdr8CuW8Ne+vLQStejS6BnrxBXYXPSeBdDLF2mLyri1bTkcogo7eThK9jZd8awSJJHMzTXbVevHnlnc5vAEf3UO9qA1Mjwmgo7uDUCRIcn6FYq45ixJWJhgN0XOkF4+v9SGzAkG8twPNo7G+vGapwbilBe31exsW893n+zh8YoBirsDqQtK2c6s74fP76OzvJmTC8n04EUEogrUF61TUsqygNZ+H7qG+PYt5M8FIiMFTQfLZPOlkipIDUokFI0HiPQlCUXPjUELxMIZukFpuPOKvFVhS0Iqq0DPYh6o1MV5XCMKxCOFYhEqpTDqZIp/O2SrftKoqhONRYt0d+AI+s825Q6QzSr1WI2eBzLCWHBR2DXQTbEPPI6VBPl0gn8pSyBaQFsxVIRSFUCRIJBElFN14xFsRaUhuTi9SNXll0XI9dLgj0hYxw0Z8Q6QjQqQjgpQGpVyJQjZPMVekWm5+8fnd4vX7CEaChKJhApEAwgbbpYQi6BroYXlq4U52KzOwlKAVVSHemzClbSEUgtEQwVvliw1dp1y4FThUKm8EFVUqzR3QC4HX58Xj9+IP+PCH/PiDgYYCnqyE5vUQ7oyZmk7CUoKOJKKWKTWmqOpdAoeN+e16pUqtUkOv69RrNep1faNeiS4BeZdPvvFdBIoqUFQVTVPRPB5Uj4Lm9eLxeR23byTaGSO/njVtbGIZQQtFIWLxjawC8Pi8bZnrtSuKqhBJRMmY1EtbozsEAuGgZXpnl/0RNHFLm2UUFIw6s1TvQcTj86D5PKa0bRlBuzW8nUXApFrilhC0UJSmrAi6WAez0rBZQtBNXRF0sQSKSb+pNQTt9s6OQzFpMcgSgm5Wfg0X62CYFEZgCUEb7pYpx2FW4hoFMD363TCk20s7DJPSHxQVwBL7aMo55wXfH2TKeVNiznMKYIkq5qW86Q8KlyZRrVSpNTmN2W6QkFUQcrbtLW9BKVeyVbC9y/aUMuZ0TgKyCpIrprR+D9IwyNkgkYnLzhi6eb+jgA8UKcRlU1rfguxqyjYpp1y2Jr2ybtqTVsI1BSHGTGl9C6rVGquL1tlB7NIY1XKF1Mp6S7Oo7oQUvK/MXrg6LmHOFAvuskZiGAbZtTS5lOt62A1pSJZvLGIYBvoDqpS1CiEZVwAE/B9TLNiEvinD0crcTWpVe6VxPeisLq5QKW3swzTMyVaVmTk2cem2oL9thgWb2bxUaug6i5PzGzmWXSxPKpkinUzdeS2lbPvSt5Dyr/g6ugIQKivfAUx1Xu+9AdVKlcWpOXeQaHEya2lW52/e9367BW0I8X24FcsxPj5elYL/1lYL7mWLcUSlVGFhcs7tqS1KOpliZXZ56w/bm8pAGlL5NmwKTpLw5XZasBljh1FxpVRm7trMgU6PazUkkFy4SXKLnnnzMW1D8vr82+OTsEnQcxcnrkj4i3basdminajXasxfn3VnPyyArussTM6SXkk9+OA2IRTx1dt/K3d/IF9uvznsqi6glAbLNxZvZeh3/WozKGQLzExMWy3ZZanuEV+//eKurSKZxdW5+OHuZ4Fj7bRIIHYdPlotV8iuZ/H6PHj91klY6GQMXWdlYYXVhZVdJ5BXFOX+eogtQf6nubcm/veddu8zBOXXgbZPJDaScV6v11mcXmBpeoFaxZ2vbhUSyKymuXH1g4az9SvtqcZb1RTt321+477NfOnF5EK8v/sIMNoOi24jJQ0vmVbLVTKrKWq1Ov6Qv009wsGgmCuwPL1Adi2D3MOMhUf10IY8Z384ffHqH29+Y8smjzx9NqFWjWtAV8tNusVGVdi9F9BUVIVYZ5yOngSqxzIZzuzFrRLJqZtrlAqlPV9GUQQereVpDIqKwZnpdyZmNr+55Xbr7HyyFDvcfVPA3261VbcRQuxryVRKSblQIp1cp1Kq4vF6WlIFyolIQ5JPZVmeWSKdTO173l9VPW1wOcSv33h74s/va3u7wzOLq5fi/T0ngfMttWsT+xX1barlCtm19J3RuMfntWyicDOpFMukbq5xc3aJXCrblNkjIQQereUdyXgXwX+0tLR0n1h2/JWPjR6L6fjeAY62zLR7qNZqTc+kLxSFcDxCJBElGA61tOSZ1alX6+RSGXLrWSotSOquaR7U1o5lqopQnp2+OP7WVh8+8KcdHj3zpES+CvibbdlWGNKgXqu1bKVJURQC4SDhWJhQPHIgsjZVy1UKmRz5TJ7yPnzjB6EoCh6ttUkaheCzNy5O/O62n+/mIoOjZ14SyK/Rpjweuq5T11sfvyEAfyhIIBLAHw4SCAVRHOCa1CpVSvkixXyJUq5IfR+D7UbweVu+LvDKzNjEi+ywtLzrX2/osZHfQPJbTTFrF9TqtbbH1QrAFwzgDwfwB3x4Az68fr+lXZR6vU6lVKFaqlAulCnli6bUOvdo3lZ3Bu+qVJ77YOyDHbMUNGTB0OjIl4Bf2pdZu0ZSrdXNr0wlBD7/LXH7vHi8no0ZFJ8HrU3Tg1Ia1Cp1apUqtWpt479ShXKpYop476UNfvMN4CdmxiaWHnRgo/+kxNDo6S+C+OU9mdUgEqjVqqbtUXsQQhG3aqaoaKqGoimomoaqqqiqAmKjvsrGsepdPf3GRlK5EWWpGxhyI3uUUdfR6xv/r+k6Rq1u6fBZj6ahKK0ch8gVVeXZD9567/3dHL2nZ8Tg6JnfFshf28u5DSMlNb1maqkwl60QeDS1xWLmhiKMj01fvHZttyfsyZrMUvJ7sf7utICfodUDRSFQb900q/bUBxGv5mm1mMfrWu2nZi9cn27kpD1blFlafTPe3z0GfBxo+fBWURQUoZi1AdPlFopQ8Hg8iBb6zBK+pVF5YfbCVMPbAvc9LB388NkzimJ8TbZpRVFKqOvtnwFxAU3VWp2cvioE/+zGxYnfY4+bXvZtXWY5mewKxb8ifaoXwVO02AURAlRFRSB23Lrl0jyEUPB4Wz6TMa4I5RM3Ll79X/u5SFMnDgcfO/WMkMofAGebed2dMGO++qAghNiYvWmtkPMgXu4i8MWxsbF9rwA1fyb8JdTBqdO/KIR4Gehr+vW3wJASvV43rQyC4xACTVFb7l4AX61rtZcX3pycb9ZFW7a00332bDgYMH4FyS8B/a1qZzNSSurGRu1tl8YRiB/PobdOGiWk+LKmKv926sKVpqega/mi7ujoqGdNFH9eGvwygp9odXuwMXDUjTqGoeO62Q9GEQqKqrbSR5ZIXhdC/Fejqv6P2cuXW7ZlvK1RCsOPnB42VOVFIeSLSJ4DWhuaJcGQOrphuH72vQiBcstH3s2u+z2QEVL+lSHE9yXqK3NjV6Za0ci9mBZ2c+qZU5FShQ8JqTwshHgYKUckdICMg4gDTa2ALqVElzqGIXe9c9lxCFDERk/chIFeEcgBeSHluhTMIMU1qXBNSMZnjk1c4uu03ff7/7TkfOhXq8mIAAAAAElFTkSuQmCC">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAABf0lEQVR4nN2VvU7DMBSFb0xAqsQIqoRARaKBFBgIqGWAkVYswAtRoa48DllKxRgGGFIWUNS8B41IghksojS5/gmKF44yOK3Pd+z42jZaJx3QKZNSqjWAaKXDv5gBaJ6BqRcPYEKVhPHoIv96efcktRAAqvgU6L95EhehFFSe8ajPmVNfbDSh0jfCJSJUW4PqfCCKKzAYTlD/YDgRG42Nwx3pEI+uz1jjvre6QL99lHolARmap7eHZ3EHQvmS0tkIBARKKfcscm7OpXSVnnVUEYgKyaR1JAgghFdfvusp0n3XE9Qp/yxKvlUyfNezHNvqdngco2lvo87d3j4AhNMAAI6vkGVk8ZZjZ7/MXj/K3fAARs/EYgrKowUZRnOvVaSfHpSd6pq9vOdf67/RCkANd/IiENnJ6BdXVNmL3GhplPwtI5wGaZQUaPg+SKO4akY4DdIoRvbBenuL51lqLLMGWpEZlzXSeYx2MNbam9LRmY0V3l/J/EviVTnrkk8JRaAfBjRSHw4mLdsAAAAASUVORK5CYII=">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400&display=swap" rel="stylesheet">
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="https://apis.google.com/js/api.js" async defer onload="gapiLoaded()"></script>
 <style>
   :root {
     --forest-deep:   #1F3329;
@@ -582,9 +583,10 @@
   }
 
   .shot-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 12px;
     align-items: center;
-    justify-content: space-between;
     padding: 10px 16px;
     border-bottom: 1px solid var(--parchment);
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -641,16 +643,17 @@
 
 <!-- HEADER -->
 <header class="app-header">
-  <svg class="header-svg" viewBox="0 0 390 110" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <svg class="header-svg" viewBox="0 0 680 110" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
     <!-- Background -->
-    <rect width="390" height="110" fill="#1F3329"/>
+    <rect width="680" height="110" fill="#1F3329"/>
     <!-- Sweeping amber paths -->
-    <path d="M-20 85 Q80 40 200 70 Q320 100 420 55" stroke="#D4B06A" stroke-width="1.5" fill="none" opacity="0.18"/>
-    <path d="M-20 95 Q100 55 220 80 Q340 105 420 68" stroke="#D4B06A" stroke-width="0.8" fill="none" opacity="0.1"/>
-    <path d="M-20 60 Q60 25 180 55 Q300 85 420 38" stroke="#E8C97E" stroke-width="0.6" fill="none" opacity="0.08"/>
+    <path d="M-20 80 C60 20 160 60 280 10 C400 -20 500 50 700 30" stroke="#D4B06A" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.20"/>
+    <path d="M-20 60 C80 10 200 70 340 30 C480 -10 580 60 700 50" stroke="#D4B06A" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.13"/>
+    <path d="M100 110 C200 60 320 95 460 35 C560 -5 640 45 720 15" stroke="#E8C97E" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.08"/>
+    <path d="M-20 40 C100 5 220 65 360 25 C480 -10 600 55 720 20" stroke="#D4B06A" stroke-width="1.0" fill="none" stroke-linecap="round" opacity="0.10"/>
   </svg>
   <div class="header-content">
-    <img class="header-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTYwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCI+CiAgPHJlY3Qgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxNjAiIHJ4PSIzNCIgZmlsbD0iIzFGMzMyOSIvPgogIDxlbGxpcHNlIGN4PSI4MiIgY3k9IjEzOCIgcng9IjUyIiByeT0iMjYiIGZpbGw9IiMxODJEMjIiLz4KICA8ZWxsaXBzZSBjeD0iODIiIGN5PSIxMjQiIHJ4PSI1MiIgcnk9IjI2IiBmaWxsPSIjM0Q1RTRBIi8+CiAgPGVsbGlwc2UgY3g9Ijc2IiBjeT0iOTYiICByeD0iMzciIHJ5PSIyMiIgZmlsbD0iIzE4MkQyMiIvPgogIDxlbGxpcHNlIGN4PSI3NiIgY3k9Ijg0IiAgcng9IjM3IiByeT0iMjIiIGZpbGw9IiM0QTdBNUUiLz4KICA8ZWxsaXBzZSBjeD0iODYiIGN5PSI2MCIgIHJ4PSIyNCIgcnk9IjE4IiBmaWxsPSIjMTgyRDIyIi8+CiAgPGVsbGlwc2UgY3g9Ijg2IiBjeT0iNDkiICByeD0iMjQiIHJ5PSIxOCIgZmlsbD0iI0Q0QjA2QSIvPgo8L3N2Zz4K" alt="Steady">
+    <img class="header-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTYwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCI+CiAgPGVsbGlwc2UgY3g9IjgyIiBjeT0iMTM4IiByeD0iNTIiIHJ5PSIyNiIgZmlsbD0iIzE4MkQyMiIvPgogIDxlbGxpcHNlIGN4PSI4MiIgY3k9IjEyNCIgcng9IjUyIiByeT0iMjYiIGZpbGw9IiMzRDVFNEEiLz4KICA8ZWxsaXBzZSBjeD0iNzYiIGN5PSI5NiIgIHJ4PSIzNyIgcnk9IjIyIiBmaWxsPSIjMTgyRDIyIi8+CiAgPGVsbGlwc2UgY3g9Ijc2IiBjeT0iODQiICByeD0iMzciIHJ5PSIyMiIgZmlsbD0iIzRBN0E1RSIvPgogIDxlbGxpcHNlIGN4PSI4NiIgY3k9IjYwIiAgcng9IjI0IiByeT0iMTgiIGZpbGw9IiMxODJEMjIiLz4KICA8ZWxsaXBzZSBjeD0iODYiIGN5PSI0OSIgIHJ4PSIyNCIgcnk9IjE4IiBmaWxsPSIjRDRCMDZBIi8+Cjwvc3ZnPg==" alt="Steady">
     <div class="header-text">
       <span class="header-eyebrow">Chapter 1 · Health</span>
       <span class="header-wordmark">Steady</span>
@@ -664,12 +667,26 @@
 <div class="sync-bar">
   <div class="sync-status">
     <div class="sync-dot" id="sync-dot"></div>
-    <span id="sync-label">Not connected</span>
+    <span id="sync-label">Not connected to GitHub</span>
   </div>
   <div class="sync-actions">
     <button class="btn-sync" onclick="resetLocalData()">Reset local data</button>
-    <button class="btn-sync" id="btn-signout" style="display:none" onclick="signOut()">Sign out</button>
-    <button class="btn-sync primary" id="btn-signin" onclick="signIn()">Connect Google Drive</button>
+    <button class="btn-sync" id="btn-disconnect" style="display:none" onclick="disconnectGitHub()">Disconnect</button>
+    <button class="btn-sync primary" id="btn-connect" onclick="openPATModal()">Connect GitHub</button>
+  </div>
+</div>
+
+<!-- PAT MODAL -->
+<div id="pat-modal" style="display:none;position:fixed;inset:0;background:rgba(10,20,15,.65);z-index:2000;align-items:center;justify-content:center;padding:1rem;" onclick="patBackdropClose(event)">
+  <div style="background:var(--parchment);border-top:3px solid var(--amber);border-radius:12px;padding:24px;width:min(440px,90vw);box-shadow:0 20px 60px rgba(0,0,0,.4);">
+    <div style="font-size:1.1rem;font-weight:500;color:var(--forest-deep);margin-bottom:.4rem;">Connect GitHub Sync</div>
+    <p style="font-size:.78rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem;">Enter a GitHub Personal Access Token with <strong>Contents: Read &amp; write</strong> permission scoped to the <code style="background:var(--parchment-dim);padding:1px 5px;border-radius:3px;font-size:.74rem;">rtpalme-C2/life-stuff-data</code> repository.</p>
+    <label style="display:block;font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-muted);margin-bottom:.3rem;">Personal Access Token</label>
+    <input type="password" id="pat-input" placeholder="github_pat_…" autocomplete="off" style="width:100%;padding:8px 12px;border:1px solid var(--parchment-dim);border-radius:6px;font-family:inherit;font-size:.82rem;color:var(--text-primary);background:white;outline:none;margin-bottom:1rem;">
+    <div style="display:flex;gap:.75rem;">
+      <button onclick="closePATModal()" style="flex:1;padding:8px;border:1px solid var(--parchment-dim);border-radius:6px;background:white;font-family:inherit;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;color:var(--text-muted);">Cancel</button>
+      <button onclick="savePAT()" style="flex:2;padding:8px;border:none;border-radius:6px;background:var(--forest-deep);color:var(--amber-light);font-family:inherit;font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Save &amp; Sync</button>
+    </div>
   </div>
 </div>
 
@@ -1127,7 +1144,8 @@ function renderShots() {
   recent.forEach(s => {
     const row = document.createElement('div');
     row.className = 'shot-row';
-    row.innerHTML = `<span>${formatDate(s.date)}</span><span class="shot-check">✓</span>`;
+    const dosageLabel = s.dosage != null ? `${s.dosage} mg` : '—';
+    row.innerHTML = `<span>${formatDate(s.date)}</span><span style="color:var(--text-muted);font-size:.78rem;">${dosageLabel}</span><span class="shot-check">✓</span>`;
     logEl.appendChild(row);
   });
 }
@@ -1187,128 +1205,229 @@ document.getElementById('shot-toggle').addEventListener('change', function() {
   let shots    = loadShots();
 
   if (this.checked) {
+    // Uncheck immediately — will re-check after dosage is confirmed
+    this.checked = false;
     if (!shots.some(s => s.date === sunday)) {
-      shots.push({ date: sunday });
-      saveShots(shots);
-      scheduleSave();
-      showToast('Shot logged ✓');
+      openDosageModal(sunday);
     }
   } else {
     shots = shots.filter(s => s.date !== sunday);
     saveShots(shots);
     scheduleSave();
     showToast('Shot removed');
+    renderShots();
   }
-
-  renderShots();
 });
 
-// ── GOOGLE DRIVE SYNC ──────────────────────────────────────────────────────
-const CONFIG = {
-  CLIENT_ID: '714545608495-qjrpqic57gi549kh9nfhpl53shlf78s8.apps.googleusercontent.com',
-  API_KEY:   'AIzaSyC0mBVjHBEc2KsBfRodnArfcqoO1BZ1qZI',
-};
-const DRIVE_FILENAME = 'steady-data.json';
-const SCOPES = 'https://www.googleapis.com/auth/drive.file';
+function openDosageModal(date) {
+  // Get last dosage as default
+  const shots = loadShots();
+  const lastDosage = shots.length > 0
+    ? [...shots].sort((a,b) => b.date.localeCompare(a.date))[0].dosage || ''
+    : '';
 
-let tokenClient, driveFileId = null, saveTimer = null, gapiReady = false, gsiReady = false;
-const configOk = CONFIG.CLIENT_ID !== 'YOUR_CLIENT_ID' && CONFIG.API_KEY !== 'YOUR_API_KEY';
+  const overlay = document.createElement('div');
+  overlay.id = 'dosage-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(10,20,15,.65);z-index:2000;display:flex;align-items:center;justify-content:center;padding:1rem;';
+  overlay.innerHTML = `
+    <div style="background:var(--parchment);border-top:3px solid var(--amber);border-radius:12px;padding:24px;width:min(340px,90vw);box-shadow:0 20px 60px rgba(0,0,0,.4);">
+      <div style="font-size:1rem;font-weight:500;color:var(--forest-deep);margin-bottom:.3rem;">Log Shot</div>
+      <div style="font-size:.75rem;color:var(--text-secondary);margin-bottom:1rem;">${formatDate(date)}</div>
+      <label style="display:block;font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-muted);margin-bottom:.3rem;">Dosage (mg)</label>
+      <input type="number" id="dosage-input" value="${lastDosage}" step="0.25" min="0" placeholder="e.g. 0.5"
+        style="width:100%;padding:8px 12px;border:1px solid var(--parchment-dim);border-radius:6px;font-family:inherit;font-size:1rem;color:var(--text-primary);background:white;outline:none;margin-bottom:1rem;">
+      <div style="display:flex;gap:.75rem;">
+        <button onclick="closeDosageModal()" style="flex:1;padding:8px;border:1px solid var(--parchment-dim);border-radius:6px;background:white;font-family:inherit;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;color:var(--text-muted);">Cancel</button>
+        <button onclick="confirmDosage('${date}')" style="flex:2;padding:8px;border:none;border-radius:6px;background:var(--forest-deep);color:var(--amber-light);font-family:inherit;font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Log Shot</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+  setTimeout(() => document.getElementById('dosage-input').focus(), 50);
 
-function gapiLoaded() {
-  gapi.load('client', async () => {
-    await gapi.client.init({ apiKey: CONFIG.API_KEY, discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'] });
-    gapiReady = true; maybeInitGSI();
-  });
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeDosageModal(); });
+  document.addEventListener('keydown', dosageKeyHandler);
 }
-function maybeInitGSI() {
-  if (!configOk) return;
-  tokenClient = google.accounts.oauth2.initTokenClient({
-    client_id: CONFIG.CLIENT_ID, scope: SCOPES,
-    callback: async (resp) => {
-      if (resp.error) { setSyncStatus('error', 'Auth error: ' + resp.error); return; }
-      setSyncStatus('saving', 'Signed in — loading data…');
-      await findOrCreateFile(); await loadFromDrive();
-    }
-  });
-  gsiReady = true;
-  const tok = sessionStorage.getItem('steady_drive_token');
-  if (tok) { gapi.client.setToken(JSON.parse(tok)); findOrCreateFile().then(loadFromDrive); }
-}
-function signIn() {
-  if (!configOk) { alert('Add Google Cloud credentials to the CONFIG block first.'); return; }
-  if (!gapiReady || !gsiReady) { alert('Google APIs still loading — try again.'); return; }
-  tokenClient.requestAccessToken({ prompt: '' });
-}
-function signOut() {
-  const t = gapi.client.getToken();
-  if (t) google.accounts.oauth2.revoke(t.access_token, () => {});
-  gapi.client.setToken(null);
-  sessionStorage.removeItem('steady_drive_token');
-  driveFileId = null;
-  setSyncStatus('disconnected', 'Not connected');
-  document.getElementById('btn-signin').style.display = '';
-  document.getElementById('btn-signout').style.display = 'none';
-}
-async function findOrCreateFile() {
-  const token = gapi.client.getToken();
-  const sr = await fetch(`https://www.googleapis.com/drive/v3/files?q=name%3D'${DRIVE_FILENAME}'%20and%20trashed%3Dfalse&fields=files(id,name)`, { headers: { 'Authorization': 'Bearer ' + token.access_token } });
-  const sd = await sr.json(); const files = sd.files || [];
-  if (files.length > 0) { driveFileId = files[0].id; }
-  else {
-    const cr = await fetch('https://www.googleapis.com/drive/v3/files?fields=id', { method: 'POST', headers: { 'Authorization': 'Bearer ' + token.access_token, 'Content-Type': 'application/json' }, body: JSON.stringify({ name: DRIVE_FILENAME, mimeType: 'application/json' }) });
-    driveFileId = (await cr.json()).id;
+
+function dosageKeyHandler(e) {
+  if (e.key === 'Escape') closeDosageModal();
+  if (e.key === 'Enter') {
+    const d = document.getElementById('dosage-input');
+    if (d) { e.preventDefault(); confirmDosage(d.closest('[onclick]') ? '' : currentDosageDate); }
   }
-  sessionStorage.setItem('steady_drive_token', JSON.stringify(gapi.client.getToken()));
-  document.getElementById('btn-signin').style.display = 'none';
-  document.getElementById('btn-signout').style.display = '';
 }
-async function loadFromDrive() {
-  if (!driveFileId) return;
-  setSyncStatus('saving', 'Loading from Drive…');
-  try {
-    const token = gapi.client.getToken();
-    const res = await fetch(`https://www.googleapis.com/drive/v3/files/${driveFileId}?alt=media`, { headers: { 'Authorization': 'Bearer ' + token.access_token } });
-    if (!res.ok) throw new Error('fetch failed');
-    const text = await res.text();
-    if (text && text.trim().startsWith('{')) {
-      const data = JSON.parse(text);
-      if (data.entries) localStorage.setItem(STORAGE_KEY, JSON.stringify(data.entries));
-      if (data.shots)   localStorage.setItem(SHOTS_STORAGE_KEY, JSON.stringify(data.shots));
-      renderAll();
-    }
-    setSyncStatus('connected', 'Synced with Google Drive');
-  } catch(e) { await saveToDrive(); }
+
+function closeDosageModal() {
+  const el = document.getElementById('dosage-overlay');
+  if (el) el.remove();
+  document.removeEventListener('keydown', dosageKeyHandler);
+  renderShots();
 }
-async function saveToDrive() {
-  if (!driveFileId) return;
-  setSyncStatus('saving', 'Saving…');
-  try {
-    const token = gapi.client.getToken();
-    const payload = { entries: loadEntries(), shots: loadShots() };
-    await fetch(`https://www.googleapis.com/upload/drive/v3/files/${driveFileId}?uploadType=media`, { method: 'PATCH', headers: { 'Authorization': 'Bearer ' + token.access_token, 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-    setSyncStatus('connected', 'Saved — ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-    sessionStorage.setItem('steady_drive_token', JSON.stringify(gapi.client.getToken()));
-  } catch(e) { setSyncStatus('error', 'Save failed'); }
+
+function confirmDosage(date) {
+  const val = document.getElementById('dosage-input').value.trim();
+  const dosage = val !== '' ? parseFloat(val) : null;
+  let shots = loadShots();
+  if (!shots.some(s => s.date === date)) {
+    shots.push({ date, dosage });
+    saveShots(shots);
+    scheduleSave();
+    showToast('Shot logged ✓');
+  }
+  closeDosageModal();
 }
-function scheduleSave() { if (!driveFileId) return; clearTimeout(saveTimer); saveTimer = setTimeout(saveToDrive, 1200); }
+
+// ── GITHUB SYNC ──────────────────────────────────────────────────────────────
+const GH_OWNER   = 'rtpalme-C2';
+const GH_REPO    = 'life-stuff-data';
+const GH_FILE    = 'steady-inventory.json';
+const GH_RAW_URL = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/main/${GH_FILE}`;
+const GH_API_URL = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+const LS_PAT     = 'steady_gh_pat';
+const LS_SHA     = 'steady_gh_sha';
+
+let saveTimer = null, pendingSave = false;
+
+function getPAT()  { return localStorage.getItem(LS_PAT) || ''; }
+function getSHA()  { return localStorage.getItem(LS_SHA) || ''; }
+function setSHA(s) { localStorage.setItem(LS_SHA, s); }
+function configOk() { return !!getPAT(); }
+
+function updateSetupBanner() {
+  if (configOk()) {
+    document.getElementById('btn-connect').style.display    = 'none';
+    document.getElementById('btn-disconnect').style.display = '';
+  } else {
+    document.getElementById('btn-connect').style.display    = '';
+    document.getElementById('btn-disconnect').style.display = 'none';
+  }
+}
+
+function openPATModal() {
+  document.getElementById('pat-input').value = getPAT();
+  const m = document.getElementById('pat-modal');
+  m.style.display = 'flex';
+  setTimeout(() => document.getElementById('pat-input').focus(), 50);
+}
+function closePATModal() { document.getElementById('pat-modal').style.display = 'none'; }
+function patBackdropClose(e) { if (e.target === document.getElementById('pat-modal')) closePATModal(); }
+
+async function savePAT() {
+  const val = document.getElementById('pat-input').value.trim();
+  if (!val) { document.getElementById('pat-input').focus(); return; }
+  localStorage.setItem(LS_PAT, val);
+  closePATModal();
+  updateSetupBanner();
+  await syncFromGitHub();
+}
+
+function disconnectGitHub() {
+  if (!confirm('Remove GitHub token from this browser?
+
+Local data will be kept.')) return;
+  localStorage.removeItem(LS_PAT);
+  localStorage.removeItem(LS_SHA);
+  updateSetupBanner();
+  setSyncStatus('disconnected', 'Not connected to GitHub');
+}
+
 function setSyncStatus(state, label) {
   const dot = document.getElementById('sync-dot');
   document.getElementById('sync-label').textContent = label;
   dot.className = 'sync-dot';
   if (state === 'connected') dot.classList.add('connected');
   else if (state === 'saving') dot.classList.add('saving');
-  else if (state === 'error') dot.classList.add('error');
+  else if (state === 'error')  dot.classList.add('error');
 }
+
+async function syncFromGitHub() {
+  setSyncStatus('saving', 'Loading from GitHub…');
+  try {
+    const res = await fetch(GH_RAW_URL + '?t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    if (text && text.trim().startsWith('{')) {
+      const parsed = JSON.parse(text);
+      const hasData = parsed &&
+        ((parsed.entries && parsed.entries.length > 0) ||
+         (parsed.shots   && parsed.shots.length   > 0));
+      if (hasData) {
+        if (parsed.entries) localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed.entries));
+        if (parsed.shots)   localStorage.setItem(SHOTS_STORAGE_KEY, JSON.stringify(parsed.shots));
+        renderAll();
+        setSyncStatus('connected', 'Synced from GitHub · ' + new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}));
+        await fetchSHA();
+        return;
+      }
+    }
+    setSyncStatus('saving', 'Pushing local data to GitHub…');
+    await saveToGitHub();
+  } catch(e) {
+    setSyncStatus('error', 'GitHub sync failed — working offline');
+  }
+}
+
+async function fetchSHA() {
+  try {
+    const res = await fetch(GH_API_URL, { headers: { 'Authorization': 'Bearer ' + getPAT(), 'Accept': 'application/vnd.github+json' } });
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data.sha) setSHA(data.sha);
+  } catch(e) {}
+}
+
+async function saveToGitHub() {
+  if (!configOk()) return;
+  setSyncStatus('saving', 'Saving to GitHub…');
+  pendingSave = true;
+  try {
+    await fetchSHA();
+    const payload = { entries: loadEntries(), shots: loadShots() };
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
+    const body = { message: 'Steady update · ' + new Date().toISOString().slice(0,10), content };
+    if (getSHA()) body.sha = getSHA();
+    const res = await fetch(GH_API_URL, {
+      method: 'PUT',
+      headers: { 'Authorization': 'Bearer ' + getPAT(), 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) { const err = await res.json().catch(()=>({})); throw new Error(err.message || 'HTTP ' + res.status); }
+    const result = await res.json();
+    if (result.content && result.content.sha) setSHA(result.content.sha);
+    pendingSave = false;
+    setSyncStatus('connected', 'Saved to GitHub · ' + new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}));
+  } catch(e) {
+    pendingSave = false;
+    setSyncStatus('error', 'Save failed — changes kept locally');
+  }
+}
+
+function scheduleSave() { if (!configOk()) return; clearTimeout(saveTimer); saveTimer = setTimeout(saveToGitHub, 1200); }
+
 function resetLocalData() {
   if (!confirm('Clear cached data and reload?')) return;
   localStorage.removeItem(STORAGE_KEY);
   localStorage.removeItem(SHOTS_STORAGE_KEY);
+  localStorage.removeItem(LS_SHA);
   location.reload();
 }
+
+window.addEventListener('beforeunload', e => { if (saveTimer || pendingSave) { e.preventDefault(); e.returnValue = ''; } });
 
 window.addEventListener('resize', () => {
   const entries = loadEntries();
   renderChart(entries);
+});
+
+// ── Init ──
+updateSetupBanner();
+if (configOk()) {
+  syncFromGitHub();
+} else {
+  setSyncStatus('disconnected', 'Not connected to GitHub');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closePATModal();
 });
 </script>
 </body>
