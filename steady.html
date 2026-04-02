@@ -188,7 +188,7 @@ header p {
 /* ── Cards ── */
 .card {
   background: white; border: 1px solid var(--parchment-dim);
-  border-radius: 3px; box-shadow: 0 2px 8px rgba(31,51,41,.1);
+  border-radius: 12px; box-shadow: 0 2px 8px rgba(31,51,41,.1);
   margin-bottom: 24px;
 }
 .card-body { padding: 20px 24px; }
@@ -200,7 +200,7 @@ header p {
 .form-input, .form-note {
   font-family: inherit; font-size: .82rem;
   padding: 7px 10px; border: 1px solid var(--parchment-dim);
-  border-radius: 2px; background: var(--parchment);
+  border-radius: 8px; background: var(--parchment);
   color: var(--text-primary); outline: none; transition: border-color .18s; width: 100%;
 }
 .form-input:focus, .form-note:focus { border-color: var(--amber); background: white; }
@@ -213,7 +213,7 @@ header p {
   flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
   padding: 8px 4px;
   background: var(--parchment); border: 1px solid var(--parchment-dim);
-  border-radius: 2px; cursor: pointer; transition: all .15s;
+  border-radius: 8px; cursor: pointer; transition: all .15s;
   font-size: 18px; line-height: 1;
 }
 .mot-btn span {
@@ -229,7 +229,7 @@ header p {
 .btn-primary {
   font-family: inherit; font-size: .68rem; font-weight: 500;
   letter-spacing: .1em; text-transform: uppercase;
-  padding: 9px 20px; border-radius: 2px;
+  padding: 9px 20px; border-radius: 20px;
   border: none; background: var(--forest-deep);
   color: var(--amber-light); cursor: pointer; transition: all .18s; width: 100%;
 }
@@ -353,10 +353,10 @@ header p {
 <body>
 
 <header>
-  <svg class="header-curves" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M-20 90 Q200 40 500 75 Q800 110 1220 55" stroke="#D4B06A" stroke-width="1.5" fill="none" opacity=".14"/>
-    <path d="M-20 75 Q300 25 600 60 Q900 95 1220 40" stroke="#D4B06A" stroke-width=".8" fill="none" opacity=".08"/>
-    <path d="M-20 105 Q250 65 550 90 Q850 115 1220 70" stroke="#E8C97E" stroke-width=".6" fill="none" opacity=".06"/>
+  <svg class="header-curves" viewBox="0 0 1200 160" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <path d="M-20 120 Q200 55 500 100 Q800 145 1220 75" stroke="#D4B06A" stroke-width="1.5" fill="none" opacity=".14"/>
+    <path d="M-20 100 Q300 35 600 80 Q900 125 1220 55" stroke="#D4B06A" stroke-width=".8" fill="none" opacity=".08"/>
+    <path d="M-20 140 Q250 88 550 120 Q850 152 1220 95" stroke="#E8C97E" stroke-width=".6" fill="none" opacity=".06"/>
   </svg>
   <div class="header-inner">
     <svg class="header-icon" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
@@ -663,7 +663,7 @@ function renderShots() {
     row.innerHTML = `
       <span>${formatDate(s.date)}</span>
       <span style="color:var(--text-muted);font-size:.76rem;">${dosageLabel}</span>
-      <button onclick="deleteShot('${s.date}')" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:12px;padding:0 2px;line-height:1;" title="Remove">&times;</button>`;
+      <button onclick="deleteShot('${s.date}')" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:.72rem;padding:0 2px;line-height:1;" title="Remove">&times;</button>`;
     logEl.appendChild(row);
   });
 }
@@ -685,17 +685,17 @@ function openShotModal() {
   overlay.id = 'shot-overlay';
   overlay.style.cssText = 'position:fixed;inset:0;background:rgba(10,20,15,.65);z-index:2000;display:flex;align-items:center;justify-content:center;padding:1rem;';
   overlay.innerHTML = `
-    <div style="background:var(--parchment);border-top:3px solid var(--amber);border-radius:12px;padding:24px;width:min(340px,90vw);box-shadow:0 20px 60px rgba(0,0,0,.4);">
+    <div style="background:var(--parchment);border-top:4px solid var(--amber);border-radius:16px;padding:24px;width:min(340px,90vw);box-shadow:0 20px 60px rgba(0,0,0,.4);">
       <div style="font-size:1rem;font-weight:500;color:var(--forest-deep);margin-bottom:1rem;">Log Shot</div>
       <label style="display:block;font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-muted);margin-bottom:.3rem;">Date</label>
       <input type="date" id="shot-date-input" value="${todayISO()}"
-        style="width:100%;padding:8px 12px;border:1px solid var(--parchment-dim);border-radius:6px;font-family:inherit;font-size:.9rem;color:var(--text-primary);background:white;outline:none;margin-bottom:.85rem;">
+        style="width:100%;padding:8px 12px;border:1px solid var(--parchment-dim);border-radius:8px;font-family:inherit;font-size:.9rem;color:var(--text-primary);background:white;outline:none;margin-bottom:.85rem;">
       <label style="display:block;font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-muted);margin-bottom:.3rem;">Dosage (mg)</label>
       <input type="number" id="shot-dosage-input" value="${lastDosage}" step="0.25" min="0" placeholder="e.g. 0.5"
-        style="width:100%;padding:8px 12px;border:1px solid var(--parchment-dim);border-radius:6px;font-family:inherit;font-size:1rem;color:var(--text-primary);background:white;outline:none;margin-bottom:1rem;">
+        style="width:100%;padding:8px 12px;border:1px solid var(--parchment-dim);border-radius:8px;font-family:inherit;font-size:1rem;color:var(--text-primary);background:white;outline:none;margin-bottom:1rem;">
       <div style="display:flex;gap:.75rem;">
-        <button onclick="closeShotModal()" style="flex:1;padding:8px;border:1px solid var(--parchment-dim);border-radius:6px;background:white;font-family:inherit;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;color:var(--text-muted);">Cancel</button>
-        <button onclick="confirmShot()" style="flex:2;padding:8px;border:none;border-radius:6px;background:var(--forest-deep);color:var(--amber-light);font-family:inherit;font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Log Shot</button>
+        <button onclick="closeShotModal()" style="flex:1;padding:8px;border:1px solid var(--parchment-dim);border-radius:8px;background:white;font-family:inherit;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;color:var(--text-muted);">Cancel</button>
+        <button onclick="confirmShot()" style="flex:2;padding:8px;border:none;border-radius:8px;background:var(--forest-deep);color:var(--amber-light);font-family:inherit;font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Log Shot</button>
       </div>
     </div>`;
   document.body.appendChild(overlay);
