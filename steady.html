@@ -977,7 +977,7 @@ function scheduleSave() {
   persist();
   if (!configOk()) return;
   clearTimeout(saveTimer);
-  saveTimer = setTimeout(saveToGitHub, 1200);
+  saveTimer = setTimeout(saveToGitHub, 400);
 }
 
 function resetLocalData() {
@@ -998,6 +998,15 @@ document.addEventListener('keydown', e => {
 
 window.addEventListener('beforeunload', e => {
   if (saveTimer || pendingSave) { e.preventDefault(); e.returnValue = ''; }
+});
+
+// ── Flush on page hide (iOS background suspend defence) ──────────────────────
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden' && saveTimer) {
+    clearTimeout(saveTimer);
+    saveTimer = null;
+    saveToGitHub();
+  }
 });
 
 // ── Init ──────────────────────────────────────────────────────────────────────
