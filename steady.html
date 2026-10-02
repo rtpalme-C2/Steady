@@ -528,18 +528,18 @@ header h1 { font-size: 2.2rem; font-weight: 300; color: var(--parchment); letter
 <script>
 
 // ── Storage ───────────────────────────────────────────────────────────────────
-const STORAGE_KEY       = 'steady-v1';
-const SHOTS_STORAGE_KEY = 'steady-shots-v1';
-function loadEntries() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; } }
-function saveEntries(e) { localStorage.setItem(STORAGE_KEY, JSON.stringify(e)); }
-function loadShots()    { try { return JSON.parse(localStorage.getItem(SHOTS_STORAGE_KEY)) || []; } catch { return []; } }
-function saveShots(s)   { localStorage.setItem(SHOTS_STORAGE_KEY, JSON.stringify(s)); }
+const LS_DATA_KEY       = 'steady-v1';
+const LS_SHOTS_KEY = 'steady-shots-v1';
+function loadEntries() { try { return JSON.parse(localStorage.getItem(LS_DATA_KEY)) || []; } catch { return []; } }
+function saveEntries(e) { localStorage.setItem(LS_DATA_KEY, JSON.stringify(e)); }
+function loadShots()    { try { return JSON.parse(localStorage.getItem(LS_SHOTS_KEY)) || []; } catch { return []; } }
+function saveShots(s)   { localStorage.setItem(LS_SHOTS_KEY, JSON.stringify(s)); }
 
 // ── persist() ── always write latest state to localStorage as a safety net
 function persist() {
   try {
-    localStorage.setItem(STORAGE_KEY,       JSON.stringify(loadEntries()));
-    localStorage.setItem(SHOTS_STORAGE_KEY, JSON.stringify(loadShots()));
+    localStorage.setItem(LS_DATA_KEY,       JSON.stringify(loadEntries()));
+    localStorage.setItem(LS_SHOTS_KEY, JSON.stringify(loadShots()));
   } catch(e) {}
 }
 
@@ -783,12 +783,16 @@ const LS_SHA     = 'steady_gh_sha';
 
 // ── Data version contract ─────────────────────────────────────────────────
 // Bump DATA_VERSION when schema changes make old data incompatible.
-// Update STORAGE_KEY to match (e.g. 'steady-v2'). For minor additions
+// Update LS_DATA_KEY to match (e.g. 'steady-v2'). For minor additions
 // (new optional fields), no bump needed — use optional chaining.
 const DATA_VERSION = 1;
 
 let saveTimer   = null;
 let pendingSave = false;
+let remoteReady  = false;  // true once the remote file has been read (or confirmed missing/empty)
+let localTrusted = false;  // true when this device started with real cached data (not seed/empty)
+function pushAllowed() { return remoteReady || localTrusted; }
+function localYMD() { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
 
 function getPAT()  { return localStorage.getItem(LS_PAT) || ''; }
 function getSHA()  { return localStorage.getItem(LS_SHA) || ''; }
@@ -850,19 +854,22 @@ async function syncFromGitHub() {
     const res = await fetch(GH_RAW_URL + '?t=' + Date.now());
     // 404 means file doesn't exist yet — push local data up to create it
     if (res.status === 404) {
+      remoteReady = true;
       setSyncStatus('saving', 'Creating data file on GitHub…');
       await saveToGitHub();
       return;
     }
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const text = await res.text();
+    if (!text || !text.trim()) remoteReady = true;
     if (text && text.trim().startsWith('{')) {
       const data = JSON.parse(text);
+      remoteReady = true;
       const hasEntries = data.entries && data.entries.length > 0;
       const hasShots   = data.shots   && data.shots.length   > 0;
       if (hasEntries || hasShots) {
-        if (hasEntries) localStorage.setItem(STORAGE_KEY,       JSON.stringify(data.entries));
-        if (hasShots)   localStorage.setItem(SHOTS_STORAGE_KEY, JSON.stringify(data.shots));
+        if (hasEntries) localStorage.setItem(LS_DATA_KEY,       JSON.stringify(data.entries));
+        if (hasShots)   localStorage.setItem(LS_SHOTS_KEY, JSON.stringify(data.shots));
         renderAll();
         setSyncStatus('connected', 'Synced from GitHub · ' + new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}));
         await fetchSHA();
@@ -893,13 +900,14 @@ async function fetchSHA() {
 // ── Write to GitHub ──
 async function saveToGitHub() {
   if (!configOk()) return;
+  if (!pushAllowed()) { setSyncStatus('error', 'Not synced yet — changes kept locally'); return; }
   setSyncStatus('saving', 'Saving to GitHub…');
   pendingSave = true;
   try {
     await fetchSHA();
     const payload = { _version: DATA_VERSION, entries: loadEntries(), shots: loadShots() };
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
-    const body = { message: 'Steady update · ' + new Date().toISOString().slice(0,10), content };
+    const body = { message: 'Steady update · ' + localYMD(), content };
     if (getSHA()) body.sha = getSHA();
 
     const res = await fetch(GH_API_URL, {
@@ -926,14 +934,15 @@ async function saveToGitHub() {
 function scheduleSave() {
   persist();
   if (!configOk()) return;
+  if (!pushAllowed()) { setSyncStatus('error', 'Not synced yet — changes kept locally'); return; }
   clearTimeout(saveTimer);
   saveTimer = setTimeout(() => { saveTimer = null; saveToGitHub(); }, 400);
 }
 
 function resetLocalData() {
   if (!confirm('Clear locally cached data and reload?\n\nYour GitHub token will be kept — only data and the cached SHA are cleared. If GitHub sync is configured, data will reload from GitHub. Otherwise the app will reload fresh.')) return;
-  localStorage.removeItem(STORAGE_KEY);
-  localStorage.removeItem(SHOTS_STORAGE_KEY);
+  localStorage.removeItem(LS_DATA_KEY);
+  localStorage.removeItem(LS_SHOTS_KEY);
   localStorage.removeItem(LS_SHA);
   location.reload();
 }
@@ -960,6 +969,7 @@ document.addEventListener('visibilitychange', () => {
 });
 
 // ── Init ──────────────────────────────────────────────────────────────────────
+localTrusted = loadEntries().length > 0 || loadShots().length > 0;
 renderAll();
 updateSetupBanner();
 window.addEventListener('resize', () => renderChart(loadEntries()));
