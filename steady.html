@@ -344,22 +344,24 @@ header h1 { font-size: 2.2rem; font-weight: 300; color: var(--parchment); letter
   .stats-bar { padding-top: 10px; padding-bottom: 10px; }
   .stat-value { font-size: 1rem; }
   .form-row { flex-direction: column; gap: 8px; }
-  .history-row {
+  .history-row, .history-header {
     grid-template-columns: 64px 60px 48px 24px 1fr 24px;
     gap: 0 8px; padding: 10px 16px;
   }
+  .history-header { padding-top: 7px; padding-bottom: 7px; }
 }
 @media (max-width: 480px) {
   header, .sync-bar, .stats-bar, .content { padding-left: 16px; padding-right: 16px; }
   header h1 { font-size: 1.5rem; }
   .stats-bar { padding: 10px 8px; }
   .stat-value { font-size: .9rem; }
-  .history-row {
+  .history-row, .history-header {
     grid-template-columns: 58px 56px 44px 22px 1fr 22px;
     gap: 0 6px; padding: 9px 14px;
-    font-size: .7rem;
   }
-  .history-note { display: none; }
+  .history-header { padding-top: 7px; padding-bottom: 7px; }
+  .history-row { font-size: .7rem; }
+  .history-note, .history-header span:nth-child(5) { display: none; }
 }
 </style>
 
