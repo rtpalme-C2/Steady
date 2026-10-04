@@ -537,6 +537,7 @@ function saveShots(s)   { localStorage.setItem(LS_SHOTS_KEY, JSON.stringify(s));
 
 // ── persist() ── always write latest state to localStorage as a safety net
 function persist() {
+  if (dataLocked) return;
   try {
     localStorage.setItem(LS_DATA_KEY,       JSON.stringify(loadEntries()));
     localStorage.setItem(LS_SHOTS_KEY, JSON.stringify(loadShots()));
@@ -791,7 +792,10 @@ let saveTimer   = null;
 let pendingSave = false;
 let remoteReady  = false;  // true once the remote file has been read (or confirmed missing/empty)
 let localTrusted = false;  // true when this device started with real cached data (not seed/empty)
-function pushAllowed() { return remoteReady || localTrusted; }
+let dataLocked   = false;  // true when remote data is from a newer app version or unrecognised: read-only, never written back
+function pushAllowed() { return !dataLocked && (remoteReady || localTrusted); }
+function isRecognised(o) { return !!o && typeof o === 'object' && !Array.isArray(o) && (Array.isArray(o.entries) || Array.isArray(o.shots)); }
+function lockedNotice(msg) { dataLocked = true; setSyncStatus('error', msg); showToast(msg); }
 function localYMD() { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
 
 function getPAT()  { return localStorage.getItem(LS_PAT) || ''; }
@@ -862,8 +866,18 @@ async function syncFromGitHub() {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const text = await res.text();
     if (!text || !text.trim()) remoteReady = true;
-    if (text && text.trim().startsWith('{')) {
+    else if (text.trim().startsWith('{')) {
       const data = JSON.parse(text);
+      if (!isRecognised(data)) {
+        lockedNotice('Unrecognised data file — read-only, nothing will be overwritten');
+        await fetchSHA();
+        return;
+      }
+      if (Number(data._version) > DATA_VERSION) {
+        lockedNotice('Data is from a newer app version — read-only. Please update the app.');
+        await fetchSHA();
+        return;
+      }
       remoteReady = true;
       const hasEntries = data.entries && data.entries.length > 0;
       const hasShots   = data.shots   && data.shots.length   > 0;
@@ -871,10 +885,16 @@ async function syncFromGitHub() {
         if (hasEntries) localStorage.setItem(LS_DATA_KEY,       JSON.stringify(data.entries));
         if (hasShots)   localStorage.setItem(LS_SHOTS_KEY, JSON.stringify(data.shots));
         renderAll();
-        setSyncStatus('connected', 'Synced from GitHub · ' + new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}));
         await fetchSHA();
+        // Older or unversioned file: save it back at the current version (nothing is discarded)
+        if (Number(data._version) !== DATA_VERSION) { await saveToGitHub(); return; }
+        setSyncStatus('connected', 'Synced from GitHub · ' + new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}));
         return;
       }
+    } else {
+      lockedNotice('Unrecognised data file — read-only, nothing will be overwritten');
+      await fetchSHA();
+      return;
     }
     // GitHub has no data — push local data up
     setSyncStatus('saving', 'Pushing local data to GitHub…');
@@ -933,6 +953,7 @@ async function saveToGitHub() {
 
 function scheduleSave() {
   persist();
+  if (dataLocked) return;
   if (!configOk()) return;
   if (!pushAllowed()) { setSyncStatus('error', 'Not synced yet — changes kept locally'); return; }
   clearTimeout(saveTimer);
